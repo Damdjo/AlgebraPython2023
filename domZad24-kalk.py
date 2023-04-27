@@ -47,7 +47,7 @@ while status != 0:
         #Oduzimanje
         prviBroj = int(input("Unesite prvi broj za oduzimanje: "))
         drugiBroj = int(input("Unesite drugi broj za oduzimanje: "))
-        print(f"\nRazlika {prviBroj} i {drugiBroj} je {prviBroj+drugiBroj}")
+        print(f"\nRazlika {prviBroj} i {drugiBroj} je {prviBroj-drugiBroj}")
     
     elif status == 3:
         #Max
