@@ -1,26 +1,5 @@
-"""sustav menija za kalkulator
-Napisati program koji će ispisati meni u oblilu
-    Meni:
-    1. Zbrajanje
-    2. Oduzimanje
-    3. Najveci
-    4. Najmanji
-    0. Izlaz
 
-1 korisnik unosi 2 broja, prikazuje se recenica u obliku " zbroj je..."
-
-2. Korisnik unosi 2 broja, prikazuje se recenica u obliku " razlika je ..."
-
-3. Korisnik unosi jedan po jedan broj, prvi se postavlja kao max, a zatim svaki sljedeci uspoređuje 
-s tim brojem i postavlja na max ako je veci, ako se unese 0, ispisuje se 
-zadnji uhvaceni najveci broj u obliku " najveci broj je ..."
-
-4. Isto kao za 3 " najmanji broj je ..."
-
-Nakon zavrsetka svake od opcija, iznova se prikazuje meni 1,2,3,4,0
-
-nema korištenja lista
-"""
+#Implementacija funkcija u program iz zadatka 24 (kalkulator) 
 
 def meni():
     print()
