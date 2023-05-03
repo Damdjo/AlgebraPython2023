@@ -70,7 +70,7 @@ broj3= broj1 & broj2
 print(broj3)
 
 
-SMList = []
+SMList = [0,0,0,0]
 if SMB < 9:
     SMList[0] = BinaryBitSum(SMB)
     SMList[1] = 0
@@ -100,3 +100,13 @@ else:
     SMList[2] = 255
     SMList[3] = BinaryBitSum(SMB-24)
     pass
+
+print(SMList)
+
+#adresa mreze je binarni & između IP i SM
+
+networkAddress = []
+for oct in range(4):
+    networkAddress.append(IPListNum[oct]&SMList[oct])
+
+print(networkAddress)
