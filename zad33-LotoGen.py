@@ -109,7 +109,8 @@ def provjeraPogBrojeva(userList,kolikoBrojeva,doKojegBroja,bonusListaUser=[],bon
         randList = vrtiBrojeve(kolikoBrojeva,doKojegBroja)
         tempList.sort()
         randList.sort()
-        pogodci = set(tempList).intersection(randList)        
+        pogodci = set(tempList).intersection(randList)
+        pogodciBonus = set(bonusListaUser).intersection(bonusListaRand)        
         
         print("*"*60)
         print(f"\nKombinacija {lista+1}. \n\nUneseni brojevi: \t\t", end = "")
@@ -143,7 +144,7 @@ def provjeraPogBrojeva(userList,kolikoBrojeva,doKojegBroja,bonusListaUser=[],bon
 
         print("\n")
         if pogodci != set():
-            print("Pogođeni su brojevi: ")
+            print("Pogođeni su brojevi: \t", end = "")
             for broj in pogodci:
                 if broj < 10:
                     print(f" {broj}", end = " ")
@@ -151,6 +152,18 @@ def provjeraPogBrojeva(userList,kolikoBrojeva,doKojegBroja,bonusListaUser=[],bon
                     print(broj, end = " ")
         else:
             print("Niste pogodili nijedan broj!")
+        
+        print()
+        if status == 3:
+            if pogodciBonus != set():
+                print("Pogođeni su bonus brojevi: ", end = "")
+                for broj in pogodciBonus:
+                    if broj < 10:
+                        print(f" {broj}", end = " ")
+                    else:
+                        print(broj, end = " ")
+            else:
+                print("Niste pogodili nijedan bonus broj!")
         print("\n","*"*60,sep = "")
     
     status = 0
