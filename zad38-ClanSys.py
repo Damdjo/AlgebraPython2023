@@ -48,11 +48,10 @@ def izbrisiClana():
 
 def dodajClana():
     global rijecnikClanova
-    tempKey = 0
+    tempKey = 0 #Privremenei ključ kojim će se redak dodavati
     tempStr = ""
     tempDate = ""
     tempList = []
-    prolaz = True
     print("_"*70)
     print(" "*10,"Dodavanje novog člana")
     print("_"*70,"\n")
@@ -97,13 +96,13 @@ def dodajClana():
 
 
 #4. član liste = 3. član + 1 mjesec
-
 for key, value in rijecnikClanova.items():  
     
     value[3] = rijecnikClanova.get(1)[2]+datetime.timedelta(31)
 
 
 def tablica():
+    #ispis tablice sa nazivima stupaca
     headerTop = f"ID\tIme\tPrezime\tDatum     \tDatum isteka\tVrsta"
     headerBot = f"  \t   \t       \tučlanjenja\tčlanarine   \tčlanarine      "
     headerUndeline = "_"*70
@@ -116,6 +115,7 @@ def tablica():
     print()
 
 def vratiNaDefault():
+    #vraća tablicu na početno stanje
     global rijecnikClanova
     rijecnikClanova = {
 1 : ["Ivan",    "Ivić",     datetime.date(2023,5,23),   datetime.date(1,1,1) , "Basic"],
@@ -136,17 +136,6 @@ def vratiNaDefault():
 
 
 
-#print(rijecnikClanova.get(1)[2]+datetime.date.month(1))
-#test = rijecnikClanova.get(1)[2]+datetime.timedelta(31)
-#print(test)
-
-"""
-for key, value in rijecnikClanova.items():
-    print(key, end = "\t")
-    for item in value:
-        print(item, end = " \t")
-    print()"""
-
 def menu():
     global status
     print("_"*70)
@@ -157,10 +146,31 @@ def menu():
     print("\t2. Dodavanje novog/uređivanje postojećeg člana")
     print("\t3. Brisanje člana")
     print("\t4. Vrati početnu tablicu")
+    print("\t5. Provjerite članstvo")
     print()
     print("\t0. Izlaz")    
     print("\n","*"*70) 
     status = int(input("\n\tUnesite željenu akciju: "))
+
+def provjeriClanstvo():
+    kljucClana = 0
+    pronadeno = 0
+    ime = input("Unesite ime: ")
+    prezime = input("Unesite prezime: ")
+    for clan in rijecnikClanova.values():
+        if ime in clan[0] and prezime in clan[1]:
+            print(f"Član je pronađen, broj članske iskaznice je \"{kljucClana}\"")
+            pronadeno = kljucClana
+        kljucClana += 1
+    return pronadeno
+
+def produziClanstvo():
+    indexClana = int(input("Unesite broj iskaznice člana kojemu produžujete članstvo: "))
+    mjesec = datetime.timedelta(31)
+    tempClan = rijecnikClanova.values(indexClana,3)
+    print(tempClan)
+
+
 
 status = -1
 while status != 0:
@@ -173,12 +183,14 @@ while status != 0:
         izbrisiClana()
     elif status == 4:
         vratiNaDefault()
+    elif status == 5:
+        provjeriClanstvo()
+    elif status == 6:
+        produziClanstvo()
     elif status == 0:
         print("Izlaz")
         break
 print("Hvala na korištenju")
-
-
 
 
 
