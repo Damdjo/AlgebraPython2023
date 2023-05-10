@@ -98,7 +98,7 @@ def dodajClana():
 #4. član liste = 3. član + 1 mjesec
 for key, value in rijecnikClanova.items():  
     
-    value[3] = rijecnikClanova.get(1)[2]+datetime.timedelta(31)
+    value[3] = rijecnikClanova[key][2]+datetime.timedelta(31)
 
 
 def tablica():
@@ -132,7 +132,7 @@ def vratiNaDefault():
 }
     for key, value in rijecnikClanova.items():  
     
-        value[3] = rijecnikClanova.get(1)[2]+datetime.timedelta(31)
+        value[3] = rijecnikClanova[key][2]+datetime.timedelta(31)
 
 
 
@@ -147,28 +147,33 @@ def menu():
     print("\t3. Brisanje člana")
     print("\t4. Vrati početnu tablicu")
     print("\t5. Provjerite članstvo")
+    print("\t6. Produživanje članstva")
+    
     print()
     print("\t0. Izlaz")    
     print("\n","*"*70) 
     status = int(input("\n\tUnesite željenu akciju: "))
 
 def provjeriClanstvo():
+    global rijecnikClanova
     kljucClana = 0
     pronadeno = 0
     ime = input("Unesite ime: ")
     prezime = input("Unesite prezime: ")
     for clan in rijecnikClanova.values():
         if ime in clan[0] and prezime in clan[1]:
-            print(f"Član je pronađen, broj članske iskaznice je \"{kljucClana}\"")
+            print(f"Član je pronađen, broj članske iskaznice je \"{kljucClana}\" i datum isteka članstva je {rijecnikClanova[kljucClana][3]}")
             pronadeno = kljucClana
         kljucClana += 1
     return pronadeno
 
 def produziClanstvo():
+    global rijecnikClanova
     indexClana = int(input("Unesite broj iskaznice člana kojemu produžujete članstvo: "))
-    mjesec = datetime.timedelta(31)
-    tempClan = rijecnikClanova.values(indexClana,3)
-    print(tempClan)
+    trajanje = int(input("Unesite mjeseci za koji produžujete članstvo: "))
+    mjesec = datetime.timedelta(trajanje*31)
+    rijecnikClanova[indexClana][3] = rijecnikClanova[indexClana][3]+mjesec
+    
 
 
 
