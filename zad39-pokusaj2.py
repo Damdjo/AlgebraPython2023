@@ -7,6 +7,7 @@
 #      1       3       3       1
 
 # formula https://hr.wikipedia.org/wiki/Binomni_koeficijent
+# + pomogao je google
 
 def binomniKoeficijent(broj,koef):
     rezultat = 1
