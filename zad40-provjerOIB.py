@@ -5,22 +5,22 @@ def lengthOIB(input):
     return len(str(input))
 
 def provjera(broj):
-    # 1. korak
+    # 1. korak - prva znamenka + 10
     broj = str(broj)
     ostBroj = int(str(broj[0])) + 10
     # 6. korak
     #petlja koja će ponavljati korake 2,3,4,5  na brojevima 2-11 OIB-a
     for ostaliBrojevi in range(1,len(broj)):
         
-        # 2. korak
+        # 2. korak - broj iz koraka 1 ako je program tek krenuo ili broj iz koraka 6 ako je prošao prvi korak podijelimo sa 10, ako je dobiveni broj 0, broj je 10
         ostatak = ostBroj%10
         if ostatak == 0:
             ostatak = 10
-        # 3. korak
+        # 3. korak - broj iz koraka 2 pomnoži se sa 2
         umnozak = ostatak * 2
-        # 4. korak
+        # 4. korak - umnožak iz koraka 3 modulo 11
         umnozak %= 11
-        # 5. korak
+        # 5. korak - sljedeća znamenka u unesenom OIB-u zbroji se sa ostatkom iz koraka 4.
         ostBroj = umnozak + int(broj[ostaliBrojevi])
         
     return ostBroj
