@@ -8,7 +8,8 @@ def provjera(broj):
     # 1. korak
     broj = str(broj)
     ostBroj = int(str(broj[0])) + 10
-    # nastaviti , treba napraviti petlju koja će ponavljati korake 2,3,4,5  na brojevima 2-11 OIB-a
+    # 6. korak
+    #petlja koja će ponavljati korake 2,3,4,5  na brojevima 2-11 OIB-a
     for ostaliBrojevi in range(1,len(broj)):
         
         # 2. korak
@@ -28,7 +29,7 @@ def provjera(broj):
 
 
 
-
+# unos OIB-a koji će biti provjeren, mora sadržavati 11 brojeva
 OIB = 0
 while lengthOIB(OIB) != 11:
     OIB = int(input("Unesite OIB za provjeru: "))
@@ -39,8 +40,8 @@ while lengthOIB(OIB) != 11:
 
 
 check = provjera(OIB)
-
-if check == 1 or check == 11:
+# 7. korak provjerava je li zadnja znamenka 0
+if (11 - check)%10 == 0:
     print(f"OIB {OIB} je ispravan!")
 else:
     print("Uneseni OIB je neispravan")
