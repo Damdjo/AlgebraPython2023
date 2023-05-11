@@ -40,7 +40,7 @@ while lengthOIB(OIB) != 11:
 
 
 check = provjera(OIB)
-# 7. korak provjerava je li zadnja znamenka 0
+# 7. korak provjerava je li zadnja znamenka 0, ako je onda je OIB ispravan
 if (11 - check)%10 == 0:
     print(f"OIB {OIB} je ispravan!")
 else:
