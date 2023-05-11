@@ -7,11 +7,12 @@ def lengthOIB(input):
 def provjera(broj):
     # 1. korak
     broj = str(broj)
-    prviBroj = int(str(broj[0])) + 10
+    ostBroj = int(str(broj[0])) + 10
     # nastaviti , treba napraviti petlju koja će ponavljati korake 2,3,4,5  na brojevima 2-11 OIB-a
-    for ostaliBrojevi in range(len(broj)):
+    for ostaliBrojevi in range(1,len(broj)):
+        
         # 2. korak
-        ostatak = prviBroj%10
+        ostatak = ostBroj%10
         if ostatak == 0:
             ostatak = 10
         # 3. korak
@@ -19,9 +20,10 @@ def provjera(broj):
         # 4. korak
         umnozak %= 11
         # 5. korak
-        umnIOst = umnozak + broj
+        ostBroj = umnozak + int(broj[ostaliBrojevi])
+        
+    return ostBroj
     
-    print(umnIOst)
 
 
 
@@ -36,4 +38,10 @@ while lengthOIB(OIB) != 11:
 
 
 
-provjera(OIB)
+check = provjera(OIB)
+
+if check == 1 or check == 11:
+    print(f"OIB {OIB} je ispravan!")
+else:
+    print("Uneseni OIB je neispravan")
+
