@@ -36,7 +36,7 @@ while lengthOIB(OIB) != 11:
     if lengthOIB(OIB) != 11:
         print("Krivi unos, pokušajte ponovno!")
 
-
+# oib sa regosa za primjer je: 69435151530
 
 
 check = provjera(OIB)
