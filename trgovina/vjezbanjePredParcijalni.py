@@ -7,13 +7,13 @@
 # Ovisno o odjelu gdje radi, prezentirana su tri različita menija (niže):
 # Skladište:    Prodaja:    Administracija:
 
-# PROIZVOD
+# PROIZVOD +++++
 # Napraviti dictionary koji opisuje jedan proizvod u trgovini
 # keys: id (jedinstvena oznaka-str), opis (opis proizvoda-str),
 # cijena (cijena proizvoda-float), stanje (komada u trgovini-int)
 # proizvod={'id':'abc123', 'opis':'Maslo Megle 250g', 'cijena':18.90, 'stanje':132}
 
-# LISTA PROIZVODA - ASORTIMAN
+# LISTA PROIZVODA - ASORTIMAN +++++
 # Napraviti hardcoded listu 10 proizvoda na osnovu dict PROIZVOD koju ćemo širiti po potrebi
 # asortiman=[proizvod1, proizvod2, ... iz PROIZVOD]
 

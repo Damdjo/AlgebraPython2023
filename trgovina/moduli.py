@@ -95,7 +95,7 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
             print()
         
 
-# proizvod={'id':'abc123', 'opis':'Maslo Megle 250g', 'cijena':18.90, 'stanje':132}
+
 
         
 
@@ -108,7 +108,7 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
 
 
 
-stupciTab =  ["Id", "Opis", "Stanje","test","test2"]
+
 
 
 def main():
