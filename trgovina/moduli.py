@@ -9,7 +9,7 @@ def sucelje(lista:list, izlaz:bool=True) -> None:
 
 def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:list=None, finder:str=None):
     """
-    Obavezno osim ako je full ispis:\n
+    Obavezno:\n
     lista_stupci -> lista prema kojoj će se ispisivati stupci (svaki item u listi = stupac)\n
     
     Nije obavezno:\n

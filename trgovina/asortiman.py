@@ -14,9 +14,7 @@ asortiman = [
                 proizvodi.milka_keks,
                 proizvodi.rizle,
                 proizvodi.sok_fis,
-                proizvodi.tortilla_wrap          
-             
-             
+                proizvodi.tortilla_wrap
             ]
 
 
