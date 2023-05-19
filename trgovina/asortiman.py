@@ -1,4 +1,5 @@
 import proizvodi
+import moduli
 
 # proizvod={'id':'abc123', 'opis':'Maslo Megle 250g', 'cijena':18.90, 'stanje':132}
 
@@ -45,15 +46,12 @@ def potrebno_nabaviti(lista_proizvoda:list, minimalno_stanja:int):
 def main():
     stanje = provjeri_stanje(asortiman,"15184563")
     print(stanje)
-    zaNabaviti = potrebno_nabaviti(asortiman, 30)
+    zaNabaviti = potrebno_nabaviti(asortiman, 1000)
     print(zaNabaviti)
-    for proizvod in asortiman:
-        for id in zaNabaviti:
-            if id in proizvod["id"]:
-                sifra = proizvod["id"]
-                opis = proizvod["opis"]
-                stanje = proizvod["stanje"]
-                print(f"Proizvod id: {sifra}\t Opis: {opis}\t {stanje}")
+    stupci = ["Id", "Opis", "Stanje"]
+    moduli.tablicaIspis(stupci,asortiman,zaNabaviti,"id")
+    
+    #moduli.tablicaIspis(None,asortiman,None,"full")
     pass 
 
 
