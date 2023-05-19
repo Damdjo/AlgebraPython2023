@@ -28,13 +28,13 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
         print("_"*20*len(lista_stupci),"\n")
         for stupac in lista_stupci:
             if lista_stupci.index(stupac) == 0:
-                print(stupac,"\t\t",end="")
+                print(stupac.title(),"\t\t",end="")
             elif lista_stupci.index(stupac) == 1:
-                print(stupac,"\t\t\t",end="")
+                print(stupac.title(),"\t\t\t",end="")
             elif lista_stupci.index(stupac) == 2:
-                print(stupac,"\t",end="")
+                print(stupac.title(),"\t",end="")
             else:
-                print(stupac,"\t\t",end="")
+                print(stupac.title(),"\t\t",end="")
         print()
         print("_"*20*len(lista_stupci),"\n")
         
@@ -57,37 +57,47 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
                     print()
 
     #FULL ISPIS
+    
+
     elif list_proizvodi != None and finder == "full":
+        lista_key_stupac = []
+        print("_"*20*4,"\n")
+        for key in list_proizvodi[0].keys():
+            lista_key_stupac.append(key)
+            if key == "id":
+                print(key.title(),"\t\t",end="")
+            elif key == "opis":
+                print(key.title(),"\t\t\t\t",end="")
+            elif key == "cijena":
+                print(key.title(),"\t\t",end="")
+            else:
+                print(key.title(),"\t\t",end="")
+        print()
         print("_"*20*4,"\n")
         for proizvod in list_proizvodi:
             for key in proizvod.keys():
                 if key == "id":
-                    print(key,"\t\t",end="")
+                    if len(proizvod["id"])<8:
+                        print(proizvod["id"],"\t\t",end ="")
+                    else:
+                        print(proizvod["id"],"\t",end ="")
+
                 elif key == "opis":
-                    print(key,"\t\t\t",end="")
+                    if len(proizvod["opis"])<=12:
+                        print(proizvod["opis"],"\t\t\t",end="")
+                    else:
+                        print(proizvod["opis"],"\t\t",end="")
+
                 elif key == "cijena":
-                    print(key,"\t",end="")
+                    print(proizvod["cijena"],"\t\t",end="")
                 else:
-                    print(key,"\t\t",end="")
+                    print(proizvod["stanje"],"\t\t",end="")
             print()
-        print("_"*20*4,"\n")
+        
 
 # proizvod={'id':'abc123', 'opis':'Maslo Megle 250g', 'cijena':18.90, 'stanje':132}
 
-        for proizvod in list_proizvodi:
-            for id in list_finder:
-                if id in proizvod["id"]:
-                    sifra = proizvod["id"]
-                    opis = proizvod["opis"]
-                    stanje = proizvod["stanje"]
-                    
-                    if len(sifra)<8:
-                        print(sifra,"\t\t",end ="")
-                    else:
-                        print(sifra,"\t",end ="")
-                    print(opis,"\t",end="")
-                    print(stanje,end="")
-                    print()
+        
 
                     
 

@@ -51,7 +51,7 @@ def main():
     stupci = ["Id", "Opis", "Stanje"]
     moduli.tablicaIspis(stupci,asortiman,zaNabaviti,"id")
     
-    #moduli.tablicaIspis(None,asortiman,None,"full")
+    moduli.tablicaIspis(None,asortiman,None,"full")
     pass 
 
 
