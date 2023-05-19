@@ -14,8 +14,8 @@ def main():
     #print("Ušli smo u main")
     listaBrojeva = [4, 11, 17, 7, 9]
     print(top3(listaBrojeva))
-    print(topn(listaBrojeva,4))
-    top3()
+    print(topn(listaBrojeva,3))
+   
 
     """broj = 10
 
@@ -72,12 +72,12 @@ def top3(lista:list) -> None:
         return None
     for item in lista:
         
-        if item > min(lista) and len(listOfTop3)<3:
+        if item > min(listOfTop3) and len(listOfTop3)<3:
             listOfTop3.append(item)
-        elif item > min(lista) and len(listOfTop3)>=3:
+        elif item > min(listOfTop3) and len(listOfTop3)>=3:
             listOfTop3.append(item)
             listOfTop3.remove(min(listOfTop3))
-        
+    listOfTop3.sort()    
     return listOfTop3
 
 
@@ -106,7 +106,7 @@ def topn(lista:list, n:int) -> None:
         elif item > min(lista) and len(listOfTopN)>=n:
             listOfTopN.append(item)
             listOfTopN.remove(min(listOfTopN))
-        
+    listOfTopN.sort()      
     return listOfTopN
 
 
