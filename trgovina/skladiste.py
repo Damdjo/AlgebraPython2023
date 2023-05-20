@@ -9,12 +9,14 @@ import moduli
 # proizvod={'id':'abc123', 'opis':'Maslo Megle 250g', 'cijena':18.90, 'stanje':132}
 
 def stanje_id(id:str) -> int:
+    "funkcija vraća stanje artikla sa unesenim id-em"
     
     for proizvod in asortiman:
         if id == proizvod["id"]:
             print(proizvod["stanje"])
 
 def izmjeni_stanje(id:str) -> int:
+
     global asortiman
     
     for proizvod in asortiman:
@@ -48,12 +50,99 @@ def izmjeni_stanje(id:str) -> int:
                 case _:
                     print("Krivi unos!")
             
+def dodaj_proizvod(lista:list) -> None:
+    """
+    lista -> lista u koju se dodaje artikl ( u ovom programu se radi o listi asortiman u datoteci asortiman.py)
+        
+    """
+
+    #unos id, te provjera da već nije u artiklima
+    print("Unesite id za novi artikl: ")    
+    while True:
+        id = input("Unos: ")
+        id_taken_check = moduli.check_if_id_taken(id,asortiman)
+        match id_taken_check:
+            case True:
+                print(f"Id \"{id}\" već postoji, pokušajte ponovno!")
+            case False:
+                check_id = moduli.confirm()
+                match check_id:
+                    case True:
+                        break
+                    case False:
+                        continue
+                
+            
+            case _:
+                print("Greška")
+    #
+    
+    #unos opisa
+    
+    while True:
+        opis = input("Unesite naziv artikla: ")
+        check_opis = moduli.confirm()
+        match check_opis:
+            case True:
+                break
+            case False:
+                pass
+            case _:
+                print("Greška")
+    
+
+    #unos cijene, provjera da je unesena kao float i potvrda
+    while True:
+        try: 
+            cijena = float(input("Unesite cijenu za artikl: "))
+        except ValueError:
+            print ("Cijena mora biti brojčano iskazana, decimale se odvajaju točkom ( . )")
+        else:
+            check_cijena = moduli.confirm()
+            match check_cijena:
+                case True:
+                    break
+                case False:
+                    pass
+                case _:
+                    print("Greška")
+    
+
+    #unos početnog stanja, provjera da je unesena kao broj i potvrda
+    while True:
+        try: 
+            poc_stanje = int(input("Unesite početno stanje artikla: "))
+        except ValueError:
+            print ("Početno stanje mora biti brojčano iskazana")
+        else:
+            if poc_stanje > 0:
+                check_poc_stanje = moduli.confirm()
+                match check_poc_stanje:
+                    case True:
+                        break
+                    case False:
+                        pass
+                    case _:
+                        print("Greška")
+            else:
+                print("Početno stanje mora biti veće od 0")
+    
+    proizvod = {'id':id, 'opis':opis, 'cijena':cijena, 'stanje':poc_stanje}
+    
+    
 
 
 
 def main():
     #stanje_id("abc123")
-    izmjeni_stanje("83418247")
+    #izmjeni_stanje("83418247")
+
+    dodaj_proizvod(asortiman)
+    
+    
+    
+          
+    
 
 
 

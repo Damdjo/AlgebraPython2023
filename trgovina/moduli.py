@@ -113,12 +113,13 @@ def vrati_rijecnik(finder_value:str,  lista_proizvoda:list) -> str:
 
 def confirm() -> bool:
     """
-    vraća True ili False ovisno o unosu
+    vraća True ili False ovisno o unosu\n
+    koristi se u kodu gdje želim da korisnik potvrdi određene radnje
     """
     
 
     while True:
-        check = input("Želite li potvrditi unesene promjene? (da/ne): ")
+        check = input("Želite li potvrditi uneseno? (da/ne): ")
         match check.capitalize():
             case "Da":
                 return True
@@ -127,6 +128,20 @@ def confirm() -> bool:
             case _:
                 pass   
     
+def check_if_id_taken(id:str, lista_proizvoda:list) -> bool:
+    """
+    id -> vrijednost ključa "id" koja će se uspoređivati sa ostalim vrijednostima u listi te vratiti True ukoliko već postoji ili False ukoliko ne\n
+    \tnpr. vrijednost "abc123" je već zauzeta u artiklu "Maslo Megle 250g", a vrijednost "12345abc" nije 
+    """
+    
+    for proizvod in lista_proizvoda:
+        if id == proizvod["id"]:            
+            return True
+            
+    #kad petlja završi nije vratilo ništa te znači da nema navedenog id-a
+    return False
+
+
 
 
 
