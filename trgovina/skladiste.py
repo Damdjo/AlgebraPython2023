@@ -20,26 +20,40 @@ def izmjeni_stanje(id:str) -> int:
     for proizvod in asortiman:
         if id == proizvod["id"]:
             stanje = proizvod["stanje"]
+            stanje_bu = stanje
             proizvod = proizvod["opis"]
             print(f"Trenutno stanje proizvoda \" {proizvod} \" je: {stanje}")
             izmjena = input("Želite li izmjeniti stanje navedenog proizvoda? (Da / Ne): ")
             match izmjena.capitalize():
                 case "Da":
                     #proizvod["stanje"] = int(input("Unesite željeno stanje proizvoda: "))
-                     artikl_za_izmjenu = moduli.vrati_rijecnik(id, asortiman)
-                     stanje = int(input("Unesite stanje: "))
-                     asortiman[artikl_za_izmjenu]["stanje"] = stanje
+                    artikl_za_izmjenu = moduli.vrati_rijecnik(id, asortiman)
+                    stanje = int(input("Unesite stanje: "))
+                    asortiman[artikl_za_izmjenu]["stanje"] = stanje
+                    print(f"Želite li stanje proizvoda \" {proizvod} \" izmjenniti sa: {stanje_bu}  na: {stanje}")
+                    check = moduli.confirm()
+
+                    #funkcija check iz modula koja shodno vraćenoj vrijednosti potvrđuje ili poništava izmjenu stanja
+                    match check:
+                        case True:
+                            print(f"Stanje proizvoda \" {proizvod} \" je izmjenjeno sa: {stanje_bu}  na: {stanje}")
+                        case False:
+                            asortiman[artikl_za_izmjenu]["stanje"] = stanje_bu
+                            print(f"Stanje proizvoda je vraćeno na prvobitno ({stanje_bu}))")
+
+
+                                       
                 case "Ne":
-                    print("Izlaz")
+                    print("Stanje proizvoda nije izmjenjeno")
                 case _:
                     print("Krivi unos!")
-            print(f"Trenutno stanje proizvoda \" {proizvod} \" je: {stanje}")
+            
 
 
 
 def main():
     #stanje_id("abc123")
-    #izmjeni_stanje("83418247")
+    izmjeni_stanje("83418247")
 
 
 

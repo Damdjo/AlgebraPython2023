@@ -111,7 +111,24 @@ def vrati_rijecnik(finder_value:str,  lista_proizvoda:list) -> str:
             return artikl
             
 
-        
+def confirm() -> bool:
+    """
+    vraća True ili False ovisno o unosu
+    """
+    
+
+    while True:
+        check = input("Želite li potvrditi unesene promjene? (da/ne): ")
+        match check.capitalize():
+            case "Da":
+                return True
+            case "Ne":
+                return False
+            case _:
+                pass   
+    
+
+
 
                     
 
