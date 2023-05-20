@@ -1,11 +1,20 @@
-def sucelje(lista:list, izlaz:bool=True) -> None:
+def sucelje(lista:list, izlaz:bool=False, login_logout:bool=False) -> None:
+    """
+    lista -> lista sa popisom opcija koja se printaju jedan ispod druge sa rednim brojevima\n    
+    ***od opcija izlaz i login_logout samo jedna može biti aktivna***\n
+    ***izlaz -> ako je True onda se na kraju ispiše opcija 0. Izlaz\n
+    ***login_logout -> ako je True onda se na kraju ispiše opcija 0. Logout
+    
+    """
     print('*'*50)
     print(' '*22,'MENI',' '*22)
     print('*'*50)
     for broj, stavka in enumerate(lista):
         print(f'\t{broj+1}. {stavka}')
-    if izlaz:
+    if izlaz and not login_logout:
         print('\t0. Izlaz')
+    if login_logout and not izlaz:        
+        print('\t0. Logout')
 
 def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:list=None, finder:str=None):
     """

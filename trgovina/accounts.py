@@ -18,7 +18,7 @@ def main():
 
 def login() -> str:
 
-    """provjerava usernama i password te vraća odgovarajući odjel"""
+    """provjerava usernama i password te vraća odgovarajući odjel i bool logged in koji označuje da je netko trenuto ulogiran"""
     
     while True:              
     
@@ -28,14 +28,20 @@ def login() -> str:
         for user in radnici:
             if user["username"] == usr_input_username and user["password"] == usr_input_password:
                 odjel = user["odjel"]
-                return odjel           
+                logged_in = True
+                return odjel, logged_in           
 
         for user in kupci:
             if user["username"] == usr_input_username and user["password"] == usr_input_password:
                 odjel = user["odjel"]
-                return odjel        
+                logged_in = True
+                return odjel, logged_in       
         print("Korisničko ime ili lozinka nisu ispravni")
-            
+    
+def logout() -> bool:
+    logged_in = False
+    return logged_in
+
         
     
            
