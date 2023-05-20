@@ -3,23 +3,23 @@
 # Meni: Stanje, Stanje po proizvodu (upit), Dodaj proizvod, Izmjeni stanje (dodaj-oduzmi), Logout
 
 #import moduli,proizvodi
-from asortiman import asortiman
 import moduli
 
 # proizvod={'id':'abc123', 'opis':'Maslo Megle 250g', 'cijena':18.90, 'stanje':132}
 
-def stanje_id(id:str) -> int:
+def stanje_id(id:str,lista_proizvoda:list) -> int:
     "funkcija vraća stanje artikla sa unesenim id-em"
     
-    for proizvod in asortiman:
+    for proizvod in lista_proizvoda:
         if id == proizvod["id"]:
-            print(proizvod["stanje"])
+            opis = proizvod["opis"]
+            stanje = proizvod["stanje"]
+            print(f"Stanje proizvoda {opis} je: {stanje}")
 
-def izmjeni_stanje(id:str) -> int:
+def izmjeni_stanje(id:str,lista_proizvoda:list) -> int:
 
-    global asortiman
     
-    for proizvod in asortiman:
+    for proizvod in lista_proizvoda:
         if id == proizvod["id"]:
             stanje = proizvod["stanje"]
             stanje_bu = stanje
@@ -29,9 +29,9 @@ def izmjeni_stanje(id:str) -> int:
             match izmjena.capitalize():
                 case "Da":
                     #proizvod["stanje"] = int(input("Unesite željeno stanje proizvoda: "))
-                    artikl_za_izmjenu = moduli.vrati_rijecnik(id, asortiman)
+                    artikl_za_izmjenu = moduli.vrati_rijecnik(id, lista_proizvoda)                    
                     stanje = int(input("Unesite stanje: "))
-                    asortiman[artikl_za_izmjenu]["stanje"] = stanje
+                    lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje
                     print(f"Želite li stanje proizvoda \" {proizvod} \" izmjenniti sa: {stanje_bu}  na: {stanje}")
                     check = moduli.confirm()
 
@@ -40,7 +40,7 @@ def izmjeni_stanje(id:str) -> int:
                         case True:
                             print(f"Stanje proizvoda \" {proizvod} \" je izmjenjeno sa: {stanje_bu}  na: {stanje}")
                         case False:
-                            asortiman[artikl_za_izmjenu]["stanje"] = stanje_bu
+                            lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje_bu
                             print(f"Stanje proizvoda je vraćeno na prvobitno ({stanje_bu}))")
 
 
@@ -60,7 +60,7 @@ def dodaj_proizvod(lista:list) -> None:
     print("Unesite id za novi artikl: ")    
     while True:
         id = input("Unos: ")
-        id_taken_check = moduli.check_if_id_taken(id,asortiman)
+        id_taken_check = moduli.check_if_id_taken(id,lista)
         match id_taken_check:
             case True:
                 print(f"Id \"{id}\" već postoji, pokušajte ponovno!")
@@ -134,10 +134,7 @@ def dodaj_proizvod(lista:list) -> None:
 
 
 def main():
-    #stanje_id("abc123")
-    #izmjeni_stanje("83418247")
-
-    dodaj_proizvod(asortiman)
+    pass
     
     
     
