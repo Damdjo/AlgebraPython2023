@@ -1,3 +1,4 @@
+import racun
 def sucelje(lista:list, izlaz:bool=False, login_logout:bool=False, odjel:str=None) -> None:
     """
     lista -> lista sa popisom opcija koja se printaju jedan ispod druge sa rednim brojevima\n    
@@ -70,15 +71,17 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
                     print()
 
 
-    #ISPIS ZA RAČUN lista_stupci = ["Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
+    #ISPIS ZA RAČUN lista_stupci = ["Redni broj","Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
     elif list_proizvodi != None and list_finder != None and finder == "racun":
         print("_"*20*len(lista_stupci),"\n")
         for stupac in lista_stupci:
             if lista_stupci.index(stupac) == 0:
-                print(stupac.title(),"\t\t",end="")
+                print("\t",stupac.title(),"\t",end="")
             elif lista_stupci.index(stupac) == 1:
-                print(stupac.title(),"\t\t\t",end="")
+                print(stupac.title(),"\t\t",end="")
             elif lista_stupci.index(stupac) == 2:
+                print(stupac.title(),"\t\t\t",end="")
+            elif lista_stupci.index(stupac) == 3:
                 print(stupac.title(),"\t",end="")
             else:
                 print(stupac.title(),"\t\t",end="")
@@ -89,14 +92,18 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
             
             
                 
-                
+            rb = proizvod["redni broj"]    
             sifra = proizvod["id"]
             opis = proizvod["opis"]                    
             cijena = proizvod["cijena"]
             stanje = proizvod["stanje"]
-            kolicina = 2#proizvod["stanje"]
+            kolicina = proizvod["kolicina"]
             ukupno = cijena * kolicina
-            
+        #ispis redni broj
+            if len(str(rb))<=4:
+                print("\t",rb,"\t",end="")
+            else:
+                print("\t",rb,"\t",end="")    
         #ispis sifre
             if len(sifra)<8:
                 print(sifra,"\t\t",end ="")
@@ -121,7 +128,7 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
             if len(str(ukupno))<=4:
                 print(ukupno,"\t\t",end="")
             else:
-                print(ukupno,"\t",end="")
+                print(round(ukupno,2),"\t",end="")
             print()
 
 

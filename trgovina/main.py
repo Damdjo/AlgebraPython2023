@@ -39,18 +39,18 @@ def main():
 
         if user == "prodaja":
             while True:
-                izbori = ["Ispis tablice sa proizvodima", "Provjera stanja proizvoda po id-u", "Izmjena stanja proizvoda po id-u", "Dodavanje novog proizvoda"]
+                izbori = ["Unos stavke na račun", "Ispis trenutnog računa", "PLACEHOLDER"]
                 moduli.sucelje(izbori,False,True,user)
                 print("")
                 izbor = int(input("Unesite željenu opciju: "))
 
                 match izbor:
                     case 1:
-                        pass
+                        racun.dodaj_stavku_na_racun(racun.stavke_na_racunu,asortiman.asortiman)
 
-                    case 99:
-                        lista_stupci = ["Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
-                        moduli.tablicaIspis(lista_stupci,asortiman.asortiman,lista_stupci,"racun")
+                    case 2:
+                        lista_stupci = ["Rb.", "Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
+                        moduli.tablicaIspis(lista_stupci,racun.stavke_na_racunu,lista_stupci,"racun")
 
     
     
