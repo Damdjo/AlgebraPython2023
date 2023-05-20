@@ -1,20 +1,24 @@
-def sucelje(lista:list, izlaz:bool=False, login_logout:bool=False) -> None:
+def sucelje(lista:list, izlaz:bool=False, login_logout:bool=False, odjel:str=None) -> None:
     """
     lista -> lista sa popisom opcija koja se printaju jedan ispod druge sa rednim brojevima\n    
     ***od opcija izlaz i login_logout samo jedna može biti aktivna***\n
     ***izlaz -> ako je True onda se na kraju ispiše opcija 0. Izlaz\n
     ***login_logout -> ako je True onda se na kraju ispiše opcija 0. Logout
-    
+                    -> možemo proslijediti i argument odjel koji će se ispisazi uz MENI
     """
+    meni = "MENI " + odjel
+    meni.upper()
+    duzina = int(50/2-len(meni)/2)
+
     print('*'*50)
-    print(' '*22,'MENI',' '*22)
+    print(' '*duzina,meni,)
     print('*'*50)
     for broj, stavka in enumerate(lista):
         print(f'\t{broj+1}. {stavka}')
     if izlaz and not login_logout:
-        print('\t0. Izlaz')
+        print('\n\t0. Izlaz')
     if login_logout and not izlaz:        
-        print('\t0. Logout')
+        print('\n\t0. Logout')
 
 def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:list=None, finder:str=None):
     """
@@ -65,6 +69,62 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
                     print(stanje,end="")
                     print()
 
+
+    #ISPIS ZA RAČUN lista_stupci = ["Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
+    elif list_proizvodi != None and list_finder != None and finder == "racun":
+        print("_"*20*len(lista_stupci),"\n")
+        for stupac in lista_stupci:
+            if lista_stupci.index(stupac) == 0:
+                print(stupac.title(),"\t\t",end="")
+            elif lista_stupci.index(stupac) == 1:
+                print(stupac.title(),"\t\t\t",end="")
+            elif lista_stupci.index(stupac) == 2:
+                print(stupac.title(),"\t",end="")
+            else:
+                print(stupac.title(),"\t\t",end="")
+        print()
+        print("_"*20*len(lista_stupci),"\n")
+        
+        for proizvod in list_proizvodi:
+            
+            
+                
+                
+            sifra = proizvod["id"]
+            opis = proizvod["opis"]                    
+            cijena = proizvod["cijena"]
+            stanje = proizvod["stanje"]
+            kolicina = 2#proizvod["stanje"]
+            ukupno = cijena * kolicina
+            
+        #ispis sifre
+            if len(sifra)<8:
+                print(sifra,"\t\t",end ="")
+            else:
+                print(sifra,"\t",end ="")
+        #ispis opisa
+            if len(opis)<=12:
+                print(opis,"\t\t",end="")
+            else:
+                print(opis,"\t",end="")
+        #ispis cijena
+            if len(str(cijena))<=5:
+                print(cijena,"\t\t",end="")
+            else:
+                print(cijena,"\t",end="")
+        #ispis kolicina
+            if len(str(kolicina))<=4:
+                print(kolicina,"\t\t\t",end="")
+            else:
+                print(kolicina,"\t\t",end="")
+        #ispis ukupno
+            if len(str(ukupno))<=4:
+                print(ukupno,"\t\t",end="")
+            else:
+                print(ukupno,"\t",end="")
+            print()
+
+
     #FULL ISPIS
     
 
@@ -103,7 +163,6 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
                     print(proizvod["stanje"],"\t\t",end="")
             print()
         
-
 def vrati_rijecnik(finder_value:str,  lista_proizvoda:list) -> str:
     """
     

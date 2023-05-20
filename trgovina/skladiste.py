@@ -16,39 +16,64 @@ def stanje_id(id:str,lista_proizvoda:list) -> int:
             stanje = proizvod["stanje"]
             print(f"Stanje proizvoda {opis} je: {stanje}")
 
-def izmjeni_stanje(id:str,lista_proizvoda:list) -> int:
+def izmjeni_stanje(id:str,lista_proizvoda:list, manual:bool=True, auto_broj:int=None) -> int:
+    """
+    funkcija izmjenjuje stanje proizvoda iz unesene liste proizvoda čiji je id unesen, manual je True/False te se odnosi na ručno(True) ili automatso izvršavanje funkcije(False)\n
+    id -> id proizvoda kojeg mijenjamo\n
+    lista_proizvoda -> lista u kojoj tražimo id proizvoda\n
+    manual -> može biti - True  -> funkcija traži ručan unos podataka
+                                -> funkcije ne traži nikakav input od korisnika ( koristi se za smanjivanje stanja u računu)
+
 
     
-    for proizvod in lista_proizvoda:
-        if id == proizvod["id"]:
-            stanje = proizvod["stanje"]
-            stanje_bu = stanje
-            proizvod = proizvod["opis"]
-            print(f"Trenutno stanje proizvoda \" {proizvod} \" je: {stanje}")
-            izmjena = input("Želite li izmjeniti stanje navedenog proizvoda? (Da / Ne): ")
-            match izmjena.capitalize():
-                case "Da":
-                    #proizvod["stanje"] = int(input("Unesite željeno stanje proizvoda: "))
-                    artikl_za_izmjenu = moduli.vrati_rijecnik(id, lista_proizvoda)                    
-                    stanje = int(input("Unesite stanje: "))
-                    lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje
-                    print(f"Želite li stanje proizvoda \" {proizvod} \" izmjenniti sa: {stanje_bu}  na: {stanje}")
-                    check = moduli.confirm()
+    
+    """
 
-                    #funkcija check iz modula koja shodno vraćenoj vrijednosti potvrđuje ili poništava izmjenu stanja
-                    match check:
-                        case True:
-                            print(f"Stanje proizvoda \" {proizvod} \" je izmjenjeno sa: {stanje_bu}  na: {stanje}")
-                        case False:
-                            lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje_bu
-                            print(f"Stanje proizvoda je vraćeno na prvobitno ({stanje_bu}))")
+    if manual == True:
+        for proizvod in lista_proizvoda:
+            if id == proizvod["id"]:
+                stanje = proizvod["stanje"]
+                stanje_bu = stanje
+                proizvod = proizvod["opis"]
+                print(f"Trenutno stanje proizvoda \" {proizvod} \" je: {stanje}")
+                izmjena = input("Želite li izmjeniti stanje navedenog proizvoda? (Da / Ne): ")
+                match izmjena.capitalize():
+                    case "Da":
+                        #proizvod["stanje"] = int(input("Unesite željeno stanje proizvoda: "))
+                        artikl_za_izmjenu = moduli.vrati_rijecnik(id, lista_proizvoda)                    
+                        stanje = int(input("Unesite stanje: "))
+                        lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje
+                        print(f"Želite li stanje proizvoda \" {proizvod} \" izmjenniti sa: {stanje_bu}  na: {stanje}")
+                        check = moduli.confirm()
+
+                        #funkcija check iz modula koja shodno vraćenoj vrijednosti potvrđuje ili poništava izmjenu stanja
+                        match check:
+                            case True:
+                                print(f"Stanje proizvoda \" {proizvod} \" je izmjenjeno sa: {stanje_bu}  na: {stanje}")
+                            case False:
+                                lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje_bu
+                                print(f"Stanje proizvoda je vraćeno na prvobitno ({stanje_bu}))")
 
 
-                                       
-                case "Ne":
-                    print("Stanje proizvoda nije izmjenjeno")
-                case _:
-                    print("Krivi unos!")
+                                        
+                    case "Ne":
+                        print("Stanje proizvoda nije izmjenjeno")
+                    case _:
+                        print("Krivi unos!")
+    else:
+        for proizvod in lista_proizvoda:
+            if id == proizvod["id"]:
+                
+                stanje = proizvod["stanje"]
+                artikl_za_izmjenu = moduli.vrati_rijecnik(id, lista_proizvoda)
+                stanje = stanje + auto_broj
+                lista_proizvoda[artikl_za_izmjenu]["stanje"] = stanje
+
+
+
+
+                
+
             
 def dodaj_proizvod(lista:list) -> None:
     """
