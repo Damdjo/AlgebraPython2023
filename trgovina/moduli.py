@@ -95,7 +95,21 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
             print()
         
 
-
+def vrati_rijecnik(finder_value:str,  lista_proizvoda:list) -> str:
+    """
+    
+    finder_value -> vrijednos artikla kojem je ključ "id" (npr. "abc123" koji vraća "Maslo Megle 250g")\n
+    lista_proizvoda -> lista sa riječnicima u kojoj će se tračiti id iz finder_value argumenta
+    
+    """  
+    
+    
+    
+    for proizvod in lista_proizvoda:
+        if proizvod["id"] == finder_value:
+            artikl = lista_proizvoda.index(proizvod)
+            return artikl
+            
 
         
 
