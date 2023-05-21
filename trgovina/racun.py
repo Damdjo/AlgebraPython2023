@@ -112,8 +112,21 @@ def vrati_stanje(lista_proizvoda:list):
     
     pass
 
-def ispis_stavki() -> None:
+def ispis_stavki(treba_rb:bool=False,rb:int=None) -> None:
+    """
+    funkcija ne treba argumente, ali mogu se dodati argumenti "treba_rb" i "rb"\n
+    treba_rb -> treba li ispisati redni broj (npr. redni broj računa)\n
+    rb -> redni broj koji će se ispisati
+    
+    """
     lista_stupci = ["Rb.", "Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
+    print("\n"*20)
+    
+    if treba_rb:
+
+        print(f"Račun broj {rb}")
+    
+    
     moduli.tablicaIspis(lista_stupci,stavke_na_racunu,lista_stupci,"racun")
 
 def novi_racun(lista_proizvoda:list) -> list:
@@ -167,6 +180,17 @@ def spremanje_racuna(popis_racuna:dict, racun:list) -> None:
     popis_racuna[counter_racuna] = lista
     counter_racuna += 1
 
+def ispis_racuna(id_racuna:str,treba_rb:bool=False) -> None:
+    """
+    funkcija pristupa u listu "svi_racuni" te ispisuje onaj račun kojemu odgvara argument id_racuna
+    
+    """
+    for racun_kljuc  in svi_racuni.keys():
+        if id_racuna == racun_kljuc:
+            ispis_stavki(treba_rb,int(id_racuna))
+            return None
+    print("Nema računa pod navedenim rednim brojem")
+    
 
 
 

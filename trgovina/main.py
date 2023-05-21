@@ -54,7 +54,7 @@ def main():
 
                     if user == "prodaja":
                         while True:
-                            izbori = ["Novi račun", "Ispis trenutnog računa", "PLACEHOLDER"]
+                            izbori = ["Novi račun", "Ispis trenutnog računa", "Ispis spremljenog računa"]
                             moduli.sucelje(izbori,False,True,user)
                             print("")
                             izbor = moduli.input_validation()
@@ -67,7 +67,11 @@ def main():
                                     #lista_stupci = ["Rb.", "Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
                                     #moduli.tablicaIspis(lista_stupci,racun.stavke_na_racunu,lista_stupci,"racun")
                                 case 3:
-                                    print(racun.svi_racuni)
+                                    print("Unesite id računa koji želite ispisati: ")
+                                    id_racuna = moduli.input_validation()
+                                    racun.ispis_racuna(id_racuna,True)
+                                    print("\n")
+                                    moduli.enter_to_continue()
                                     
                                 case 4:
                                     pass

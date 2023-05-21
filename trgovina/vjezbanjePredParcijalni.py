@@ -17,15 +17,15 @@
 # Napraviti hardcoded listu 10 proizvoda na osnovu dict PROIZVOD koju ćemo širiti po potrebi
 # asortiman=[proizvod1, proizvod2, ... iz PROIZVOD]
 
-# SKLADISTE - ULAZ
+# SKLADISTE - ULAZ +++++
 # Logiranje s korisnickim imenom-lozinkom (ulaz-ulaz)
 # Meni: Stanje, Stanje po proizvodu (upit), Dodaj proizvod, Izmjeni stanje (dodaj-oduzmi), Logout
 
-# PRODAJA - IZLAZ
+# PRODAJA - IZLAZ +++++
 # Logiranje s korisnickim imenom-lozinkom (izlaz-izlaz)
 # Meni: Stanje, Stanje po proizvodu (upit), Novi racun, Logout
 
-# RACUN
+# RACUN +++++
 # Racun je dio liste svih racuna (mozemo vise racuna jedan za drugim napraviti)
 # Dodavanje proizvoda id ili opis, kolicina
 # Ispis u obliku tablice: Stavka (1,2,3), Opis proizvoda, 
