@@ -7,7 +7,14 @@ def sucelje(lista:list, izlaz:bool=False, login_logout:bool=False, odjel:str=Non
     ***login_logout -> ako je True onda se na kraju ispiše opcija 0. Logout
                     -> možemo proslijediti i argument odjel koji će se ispisazi uz MENI
     """
-    meni = "MENI " + odjel
+    
+    if odjel != "trgovina":
+        meni = "MENI " + odjel
+    else:
+        meni = "Trgovina d.o.o"
+    
+    
+    
     meni.upper()
     duzina = int(50/2-len(meni)/2)
 
@@ -112,6 +119,8 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
         #ispis opisa
             if len(opis)<=12:
                 print(opis,"\t\t",end="")
+            elif len(opis)<=4:
+                print(opis,"\t\t\t",end="")
             else:
                 print(opis,"\t",end="")
         #ispis cijena
@@ -159,7 +168,9 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
                         print(proizvod["id"],"\t",end ="")
 
                 elif key == "opis":
-                    if len(proizvod["opis"])<=12:
+                    if len(proizvod["opis"])<=4:
+                        print(proizvod["opis"],"\t\t\t\t",end="")
+                    elif len(proizvod["opis"])<=12:
                         print(proizvod["opis"],"\t\t\t",end="")
                     else:
                         print(proizvod["opis"],"\t\t",end="")
@@ -217,11 +228,27 @@ def check_if_id_taken(id:str, lista_proizvoda:list) -> bool:
     return False
 
 
+def enter_to_continue() -> None:
+    user_input = input("Press enter to continue...")
+    match user_input:
+        case _:
+            pass
 
 
+def input_validation() -> int:
+    """
+    funkcija pokušava varijablu "izbor" pretvoriti u int, ako ne onda se traži ponovan unos\n
+    koristi se prilikom odabira opcija u meni-u kako ne bi izbacivalo errore
+    """
+    izbor = input("Unesite željenu opciju: ")        
+    try:        
+        izbor = int(izbor)
+    except ValueError:
+        print ("Odabir mora biti cijeli broj!")
+        enter_to_continue()
+    else:         
 
-                    
-
+        return int(izbor)
 
 
 

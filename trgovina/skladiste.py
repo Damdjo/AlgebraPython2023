@@ -153,6 +153,7 @@ def dodaj_proizvod(lista:list) -> None:
                 print("Početno stanje mora biti veće od 0")
     
     proizvod = {'id':id, 'opis':opis, 'cijena':cijena, 'stanje':poc_stanje}
+    lista.append(proizvod)
     
     
 
