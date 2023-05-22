@@ -33,7 +33,7 @@
 # Izostaviti detalje poput PDV-a
 # Ispis računa SMANJUJE stanje proizvoda u listi proizvoda za odgovarajuću količinu!
 
-# ADMINISTRACIJA
+# ADMINISTRACIJA +++++
 # Logiranje s korisnickim imenom-lozinkom(admin-admin)
 # Uvid u stanje na skladistu
 # Uvid u broj izdanih računa
