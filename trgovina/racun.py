@@ -12,7 +12,7 @@ svi_racuni = {}
 
 stavke_na_racunu = []
 counter = 1
-counter_racuna = 1
+counter_racuna = 0
 
 def dodaj_stavku_na_racun(lista:list, lista_proizvoda:list) -> dict:
     """
@@ -101,11 +101,11 @@ def dodaj_stavku_na_racun(lista:list, lista_proizvoda:list) -> dict:
                 print("Error")
     
     proizvod = {"redni broj":counter, 'id':id, 'opis':opis, 'cijena':cijena, "kolicina":kolicina, "ukupno":round(kolicina*cijena,2), "stanje":stanje}
-    stavke_na_racunu.append(proizvod)
+    lista.append(proizvod)
     counter += 1
 
 def vrati_stanje(lista_proizvoda:list):
-    #[{'redni broj': 1, 'id': 'abc123', 'opis': 'Mlijeko Megle 250g', 'cijena': 18.9, 'kolicina': 132, 'ukupno': 2494.7999999999997, 'stanje': 132}]
+    #[{'redni broj': 1, 'id': 'abc123', 'opis': 'Mlijeko Megle 250g', 'cijena': 18.9, 'kolicina': 132, 'ukupno': 2494.79, 'stanje': 132}]
     
     for stavka in stavke_na_racunu:
         stavka["stanje"] = skladiste.izmjeni_stanje(stavka["id"],lista_proizvoda,False,stavka["kolicina"])
@@ -125,9 +125,14 @@ def ispis_stavki(treba_rb:bool=False,rb:int=None) -> None:
     if treba_rb:
 
         print(f"Račun broj {rb}")
+        for key,value in svi_racuni.items():
+            if key == rb:
+                moduli.tablicaIspis(lista_stupci,value,lista_stupci,"racun")
+                    
     
-    
-    moduli.tablicaIspis(lista_stupci,stavke_na_racunu,lista_stupci,"racun")
+    ##BUGBUG treba
+    else:
+        moduli.tablicaIspis(lista_stupci,stavke_na_racunu,lista_stupci,"racun")
 
 def novi_racun(lista_proizvoda:list) -> list:
     """
@@ -150,7 +155,7 @@ def novi_racun(lista_proizvoda:list) -> list:
                 spremanje = input("Želite li spremiti trenutni račun? (da/ne)")
                 match spremanje.capitalize():
                     case "Da":
-                        spremanje_racuna(svi_racuni,stavke_na_racunu)
+                        spremanje_racuna(svi_racuni,stavke_na_racunu)                        
                         break
                     case "Ne":
                         vrati_stanje(lista_proizvoda)
@@ -176,9 +181,10 @@ def spremanje_racuna(popis_racuna:dict, racun:list) -> None:
     global counter_racuna
 
     lista = racun
-
-    popis_racuna[counter_racuna] = lista
     counter_racuna += 1
+    popis_racuna[counter_racuna] = lista
+    
+    
 
 def ispis_racuna(id_racuna:str,treba_rb:bool=False) -> None:
     """

@@ -1,4 +1,4 @@
-import accounts,asortiman,moduli,skladiste,racun
+import accounts,asortiman,moduli,skladiste,racun,admin
 
 
 
@@ -64,14 +64,48 @@ def main():
                                     racun.novi_racun(asortiman.asortiman)
                                 case 2:
                                     racun.ispis_stavki()
-                                    #lista_stupci = ["Rb.", "Id","Opis", "Jed.cijena", "Kolicina", "Ukupno"]
-                                    #moduli.tablicaIspis(lista_stupci,racun.stavke_na_racunu,lista_stupci,"racun")
+                                    
                                 case 3:
                                     print("Unesite id računa koji želite ispisati: ")
                                     id_racuna = moduli.input_validation()
                                     racun.ispis_racuna(id_racuna,True)
                                     print("\n")
                                     moduli.enter_to_continue()
+                                    
+                                case 4:
+                                    print(racun.svi_racuni)
+
+                                case 0:
+                                    logged_in = accounts.logout()
+                                    print("\n"*25)
+                                    break
+                    if user == "admin":
+                        while True:
+                            izbori = ["Ispis stanja svih proizvoda","Broj izdanih racuna","Ukupan promet", ]
+                            moduli.sucelje(izbori,False,True,user)
+                            print("")
+                            izbor = moduli.input_validation()
+
+                            match izbor:
+                                case 1:
+                                    print("\n"*25)                                                                       
+                                    moduli.tablicaIspis(None,asortiman.asortiman,asortiman.asortiman,"stanje")
+                                    print()                                    
+                                    moduli.enter_to_continue()
+                                
+                                case 2:
+                                    print("\n"*25) 
+                                    admin.koliko_racuna(racun.counter_racuna)
+                                    print()
+                                    moduli.enter_to_continue()
+                                
+                                case 3:
+                                    sav_promet = admin.promet(racun.svi_racuni)
+                                    match sav_promet:
+                                        case 0:
+                                            print("Još nije bilo prometa!")
+                                        case _:
+                                            print(f"Ukupno je bilo {sav_promet} € prometa.")
                                     
                                 case 4:
                                     pass

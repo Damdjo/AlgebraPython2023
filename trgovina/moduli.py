@@ -37,8 +37,9 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
     list_proizvodi -> riječnik proizvoda iz kojeg će se izvlačiti vrijednosti za stupce\n
     list_finder -> lista vrijednosti iz kojih će se izvlačiti nazivi riječnika(npr. banana...)\n
     finder -> vrijednot sa pomoću koje se dohvaćaju specifične tablice/ispisi
-    \t id = prilikom provjere stanja vraća id, opis i trenutno stanje svih proizvoda ispod navedene granice
-    \t full = tablica sa svim stupcima i proizvodima
+    \t id = prilikom provjere stanja vraća id, opis i trenutno stanje svih proizvoda ispod navedene granice\n
+    \t full = tablica sa svim stupcima i proizvodima\n
+    \t racun =  \n
 
 
 
@@ -177,6 +178,43 @@ def tablicaIspis(lista_stupci:list=None,list_proizvodi:dict=None,list_finder:lis
 
                 elif key == "cijena":
                     print(proizvod["cijena"],"\t\t",end="")
+                else:
+                    print(proizvod["stanje"],"\t\t",end="")
+            print()
+    
+    elif list_proizvodi != None and finder == "stanje":
+        lista_key_stupac = []
+        print("_"*20*4,"\n")
+        for key in list_proizvodi[0].keys():
+            lista_key_stupac.append(key)
+            if key == "id":
+                print(key.title(),"\t\t",end="")
+            elif key == "opis":
+                print(key.title(),"\t\t\t\t",end="")
+            elif key == "stanje":
+                print(key.title(),"\t\t",end="")
+            else:
+                None
+        print()
+        print("_"*20*4,"\n")
+        for proizvod in list_proizvodi:
+            for key in proizvod.keys():
+                if key == "id":
+                    if len(proizvod["id"])<8:
+                        print(proizvod["id"],"\t\t",end ="")
+                    else:
+                        print(proizvod["id"],"\t",end ="")
+
+                elif key == "opis":
+                    if len(proizvod["opis"])<=4:
+                        print(proizvod["opis"],"\t\t\t\t",end="")
+                    elif len(proizvod["opis"])<=12:
+                        print(proizvod["opis"],"\t\t\t",end="")
+                    else:
+                        print(proizvod["opis"],"\t\t",end="")
+
+                elif key == "cijena":
+                    None
                 else:
                     print(proizvod["stanje"],"\t\t",end="")
             print()
