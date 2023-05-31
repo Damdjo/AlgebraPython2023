@@ -9,6 +9,7 @@ def main():
     izbori = ["Informacije o računu", "Prikaz stanja računa", "Prikaz prometa po računu", "Uplata na račun", "Isplata sa računa"]
     
     while True:
+        os.system("cls")
         
         moduli.meni(None,"glavni izbornik")
 
@@ -31,7 +32,7 @@ def main():
         for racun in racuni.baza_racuni:
             trenutni_racun = racun["Broj Računa"]
         
-        print(trenutni_racun)
+        
         
         try:
             izbor = int(input("Vaš izbor: \t"))
