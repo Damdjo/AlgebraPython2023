@@ -43,12 +43,14 @@ class Kalendar(User):
             print_order.append(min_key)
             temp_dict.pop(min_key)
                 
-
+        
+        
+        clear_screen()
+        print()
         for key in print_order:
-                        #DATUM
-            clear_screen()
-            print()
-            print(f"ID: {key} | {self.kalendar[key][2]} u {self.kalendar[key][3]} sati događaj: {self.kalendar[key][0]}")  
+
+                          #EVENT ID         #DATUM                  #SATI                                   #NAZIV        
+            print(f"Event ID: {key} | {self.kalendar[key][2]} u {self.kalendar[key][3]} sati događaj: {self.kalendar[key][0]}")  
         print()     
         
                 
@@ -56,17 +58,7 @@ class Kalendar(User):
 
         
 
-    """
-    case 4:
-            
-        case 5:
-            print(current_user.kalendar["0001"])
-            enter_to_continue() 
-    
-    
-    
-    
-    """
+   
         
 
 
@@ -148,7 +140,8 @@ def enter_to_continue():
 
 clear_screen()
 print()
-current_user = input("Unesite naziv korisnika: ")
+#current_user = input("Unesite naziv korisnika: ")
+current_user = "Korisnik"
 current_user = Event(current_user)
 status = -1
 while status != 0:
@@ -159,6 +152,7 @@ while status != 0:
     try: odabir = int(input("Unesite odabir: "))
     except ValueError:
         print("Unos nije ispravan!")
+        enter_to_continue()
 
     else:
         match odabir:
@@ -174,6 +168,9 @@ while status != 0:
             case 4:
                 unos = input("Unesite ID eventa: ")
                 current_user.ispisi_opis(unos)
+                enter_to_continue()
+            case 5:
+                print(current_user.kalendar)
                 enter_to_continue()
 
             case 0:
