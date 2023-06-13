@@ -37,7 +37,6 @@ class Kalendar(User):
                         max = int(red[0]) + 1
         self.event_id = str(max).zfill(4)
 
-
     def check_evid(self):        
         return self.event_id.zfill(4)
     
@@ -48,15 +47,24 @@ class Kalendar(User):
             min = " 31.12.9999 23:59"
             min_key = "0000"
             for key, value in temp_dict.items():
-                
+                try:
+                    value = dt.datetime.strptime(value, " %d.%m.%Y %H:%M")
+                except TypeError as type:
+                    pass
+                except Exception as e:
+                    print(f"Greška: {type}")
+                try:
+                    min = dt.datetime.strptime(min, " %d.%m.%Y %H:%M")
+                except TypeError as type:
+                    pass
+                except Exception as e:
+                    print(f"Greška: {type}")
                 if value < min:
                     min = value
                     min_key = key
 
             print_order.append(min_key)
             temp_dict.pop(min_key)
-                
-        
         
         clear_screen()
             
@@ -65,21 +73,9 @@ class Kalendar(User):
             with open("m3/Zadace/zadaca04/eventi.txt", "r") as file_writer:
                 for red in file_writer:
                     red = red.split(";")
-                    if red[0] == key:                           
-
+                    if red[0] == key:
                                     #EVENT ID         #DATUM                  #SATI                                   #NAZIV        
                         print(f"Event ID: {red[0]} | {red[3]}. u {red[4]} \tsati događaj: {red[1]}".center(40))  
-        
-
-   
-        
-                
-
-
-        
-
-   
-        
 
 
 class Event(Kalendar):
