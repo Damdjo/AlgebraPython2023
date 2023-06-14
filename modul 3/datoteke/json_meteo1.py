@@ -6,7 +6,7 @@ povuceno = {}
 def printaj_dan(dictionary,dan):
     print("*"*55)
     dan = "day"+str(dan)
-    print(f"Vremenska prognoza za {povuceno['locality']['name']} na dan {povuceno[dan]['date']}")
+    print(f"Vremenska prognoza za {dictionary['locality']['name']} na dan {dictionary[dan]['date']}")
     print("\n")
     print(f"\tMinimalna temperatura: {dictionary[dan]['temperature_min']} °C")
     print(f"\tMaximalna temperatura: {dictionary[dan]['temperature_max']} °C")
@@ -19,7 +19,7 @@ def printaj_dan(dictionary,dan):
 def printaj_sat(dictionary,sat):
     print("*"*55)
     sat = "hour"+str(sat)
-    print(f"Vremenska prognoza za {povuceno['locality']['name']} na dan {povuceno['hour_hour'][sat]['date']} u {povuceno['hour_hour'][sat]['hour_data']}")
+    print(f"Vremenska prognoza za {dictionary['locality']['name']} na dan {dictionary['hour_hour'][sat]['date']} u {dictionary['hour_hour'][sat]['hour_data']}")
     print("\n")
     print(f"\tTemperatura: {dictionary['hour_hour'][sat]['temperature']} °C")
     print()
