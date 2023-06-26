@@ -14,7 +14,7 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 
 [Github Miroslav]
 
-[24 Sata - Scrapeanje]
+[24 Sata - Scrapeanje]  #Scrapeanje članaka sa 24 Sata
 
 
 
