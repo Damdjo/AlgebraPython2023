@@ -1,0 +1,107 @@
+{
+    "303.100.019": {
+        "sifra artikla": "303.100.019",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti AOC 25G3ZM 24.5\", VA, 2xHDMI, DP, 240Hz",
+        "cijena €": "205,26 €",
+        "cijena Kn": "1.546,53 Kn"
+    },
+    "303.100.018": {
+        "sifra artikla": "303.100.018",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti AOC 27B2H 27\", IPS, VGA/HDMI 1.4",
+        "cijena €": "135,79 €",
+        "cijena Kn": "1.023,11 Kn"
+    },
+    "304.500.002": {
+        "sifra artikla": "304.500.002",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti APC BV650I-GR, Line Interactive Back UPS BV 650VA, AVR, Schuko Outlets, 230V, APC-BV650I-GR",
+        "cijena €": "94,74 €",
+        "cijena Kn": "713,82 Kn"
+    },
+    "303.100.002": {
+        "sifra artikla": "303.100.002",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Asus VG27AH 27\" IPS, VGA/DVI/HDMI/Zvučnici/3D",
+        "cijena €": "251,34 €",
+        "cijena Kn": "1.893,72 Kn"
+    },
+    "303.100.011": {
+        "sifra artikla": "303.100.011",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti DELL S2722QC 27\" IPS, 2xHDMI 2.0, USB Type-C upstream port, 2x USB 3.2 Gen1 (1 with BC1.2 charging capability at 2A), Speakers",
+        "cijena €": "367,36 €",
+        "cijena Kn": "2.767,87 Kn"
+    },
+    "304.500.001": {
+        "sifra artikla": "304.500.001",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Eaton UPS Ellipse ECO 650 DIN, 650VA/400W, EL650DIN",
+        "cijena €": "142,11 €",
+        "cijena Kn": "1.070,73 Kn"
+    },
+    "302.100.001": {
+        "sifra artikla": "302.100.001",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti EPSON L1250 EcoTank, A4, C11CJ71402, CISS, printer",
+        "cijena €": "181,62 €",
+        "cijena Kn": "1.368,42 Kn"
+    },
+    "302.100.003": {
+        "sifra artikla": "302.100.003",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti HP LaserJet M209dwe A4 mono, 6GW62E, umanjena vrijednost",
+        "cijena €": "139,57 €",
+        "cijena Kn": "1.051,59 Kn"
+    },
+    "304.100.007": {
+        "sifra artikla": "304.100.007",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Jabra Headset Evolve2 40 MS Stereo, 24089-999-999",
+        "cijena €": "115,82 €",
+        "cijena Kn": "872,65 Kn"
+    },
+    "100.300.782": {
+        "sifra artikla": "100.300.782",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Kolink Observatory Lite MESH ATX Tempered Glass - black Window, RGB",
+        "cijena €": "48,90 €",
+        "cijena Kn": "368,44 Kn"
+    },
+    "072.200.148": {
+        "sifra artikla": "072.200.148",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Logitech G Pro Hero žični miš, 910-005440",
+        "cijena €": "62,73 €",
+        "cijena Kn": "472,64 Kn"
+    },
+    "305.110.005": {
+        "sifra artikla": "305.110.005",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Phanteks Mini ITX Eclipse P200 Air Black, PH-EC200AC_BK01, umanjena vrijednost",
+        "cijena €": "49,47 €",
+        "cijena Kn": "372,73 Kn"
+    },
+    "304.100.006": {
+        "sifra artikla": "304.100.006",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Port Replicator Icy Box IB-DK4034-CPD",
+        "cijena €": "62,11 €",
+        "cijena Kn": "467,97 Kn"
+    },
+    "305.110.006": {
+        "sifra artikla": "305.110.006",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Sharkoon Midi Tower Skiller SGC1 RGB, glass window, Black",
+        "cijena €": "68,42 €",
+        "cijena Kn": "515,51 Kn"
+    },
+    "305.040.002": {
+        "sifra artikla": "305.040.002",
+        "dostupnost": " Dostupan",
+        "naziv": "Artikl umanjene vrijednosti Supermicro X8DAL-i Dual LGA1, Bulk",
+        "cijena €": "179,69 €",
+        "cijena Kn": "1.353,87 Kn"
+    }
+}
