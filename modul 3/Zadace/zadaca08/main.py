@@ -239,7 +239,7 @@ def main():
     data = ""
 ###########################################################################
 ###########################################################################
-    pull_data, create_table, transfer_data = True, True, True       ##### Ponovno kreiranje baze i ucitavanje podataka sa neta
+    pull_data, create_table, transfer_data = False, True, True       ##### Ponovno kreiranje baze i ucitavanje podataka sa neta
 ###########################################################################
 ###########################################################################
     if pull_data:
