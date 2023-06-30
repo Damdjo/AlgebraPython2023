@@ -10,7 +10,8 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 [Apartmani - Scrapeanje]  #Scrapeanje oglasa sa njuškala
 
 [Baze podataka] 
-+ 
++
+ 
 [Spoj sa scrapeanjem]
 
 
