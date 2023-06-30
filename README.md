@@ -22,7 +22,7 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 
 
 ## SaŠa
-[Baze1] + [Baze 2] #Zadaća baze podataka
+[Baze 1] + [Baze 2] #Zadaća baze podataka
 
 
 
@@ -42,7 +42,7 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 [Baze podataka F]: https://github.com/FraneCal/Python-Course/tree/main/SQLite
 [Spoj sa scrapeanjem]: https://github.com/FraneCal/Apartment-Prices/blob/main/mainWithDatabase.py 
 [Baze podataka M]: https://github.com/Damdjo/AlgebraPython2023/tree/master/Miroslav/baze
-[Baze1]: https://www.onlinegdb.com/eF2HMDtGHE
-[Baze1]: https://www.onlinegdb.com/xnQ2IAJH8l
+[Baze 1]: https://www.onlinegdb.com/eF2HMDtGHE
+[Baze 2]: https://www.onlinegdb.com/xnQ2IAJH8l
       
   
