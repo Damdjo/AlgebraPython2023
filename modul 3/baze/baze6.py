@@ -1,6 +1,6 @@
 import sqlite3
 import os
-os.chdir("m3/baze/")
+os.chdir("modul 3/baze/")
 
 database_name = "TvrtkaDB.db"
 
