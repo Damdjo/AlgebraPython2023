@@ -11,6 +11,8 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 
 [Baze podataka F] + [Spoj sa scrapeanjem]
 
+[Baze korisnicki racuni]
+
 
 ## Miroslav:
 
@@ -44,5 +46,6 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 [Baze podataka M]: https://github.com/Damdjo/AlgebraPython2023/tree/master/Miroslav/baze
 [Baze 1]: https://www.onlinegdb.com/eF2HMDtGHE
 [Baze 2]: https://www.onlinegdb.com/xnQ2IAJH8l
+[Baze korisnicki racuni]: https://github.com/FraneCal/Python-Course/blob/main/SQLite/database_class_updated.py
       
   
