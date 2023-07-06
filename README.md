@@ -22,6 +22,7 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 
 [Baze podataka M]
 
+[Eurojackpot zadaca M] #tkinter GUI Eurojackpot
 
 ## SaŠa
 [Baze 1] + [Baze 2] #Zadaća baze podataka
@@ -47,5 +48,6 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 [Baze 1]: https://www.onlinegdb.com/eF2HMDtGHE
 [Baze 2]: https://www.onlinegdb.com/xnQ2IAJH8l
 [Baze korisnicki racuni]: https://github.com/FraneCal/Python-Course/blob/main/SQLite/database_class_updated.py
+[Eurojackpot zadaca M]: https://github.com/Damdjo/AlgebraPython2023/blob/master/Miroslav/tkinter/zad1_loto_tkinter.py
       
   
