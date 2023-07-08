@@ -72,17 +72,18 @@ class App(ctk.CTk):
 
         # definiranje grida
         self.grid_columnconfigure((1,2,3), weight= 0)
-        self.grid_rowconfigure((0,1,2), weight= 1)
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure((1,2,3,4), weight= 1)
         
-        #sidebar 1 gdje je login + profil info
-        self.sidebar_login_frame = ctk.CTkFrame(self, width=160, corner_radius=0)
-        self.sidebar_login_frame.grid(row = 0, column = 0, rowspan = 4, sticky="nsew")
+    #####sidebar 1 gdje je login + profil info
+        self.sidebar_login_frame = ctk.CTkFrame(self, width=175, corner_radius=0)
+        self.sidebar_login_frame.grid(row = 0, column = 0, rowspan = 5, sticky="nsew")
         self.sidebar_login_frame.grid_rowconfigure(6, weight=1)    
     
     
         #login title
-        self.sidebar_top_label = ctk.CTkLabel(self.sidebar_login_frame, text="LOGIN", font = ctk.CTkFont(size = 20, weight="bold"))
-        self.sidebar_top_label.grid(row = 0, column = 0, padx = 50, pady = (50, 20))
+        self.sidebar_top_label = ctk.CTkLabel(self.sidebar_login_frame, text="LOGIN".center(10), font = ctk.CTkFont(size = 20, weight="bold"))
+        self.sidebar_top_label.grid(row = 0, column = 0, padx = 30, pady = (50, 20))
         #username
         self.sidebar_uname_input = ctk.CTkEntry(self.sidebar_login_frame, width= 150, placeholder_text="Username:")
         self.sidebar_uname_input.grid(row = 1, column = 0, padx = 5, pady = (50, 10))        
@@ -101,19 +102,32 @@ class App(ctk.CTk):
         self.sidebar_event_box = ctk.CTkLabel(self.sidebar_login_frame, textvariable = self.event_log_text, width= 150, height= 250)
         self.sidebar_event_box.grid(row = 4, column = 0,  padx = 15)
         
-        #sidebar 2 sa podatcima ( u pocetku sakriven)
-        self.sidebar_user_frame = ctk.CTkFrame(self, width=160, corner_radius=0)
-        self.sidebar_user_frame.grid(row = 0, column = 0, rowspan = 4, sticky="nsew")
+    #####sidebar 2 sa podatcima ( u pocetku sakriven)
+        self.sidebar_user_frame = ctk.CTkFrame(self, width=175, corner_radius=0)
+        self.sidebar_user_frame.grid(row = 0, column = 0, rowspan = 5, sticky="nsew")
         self.sidebar_user_frame.grid_rowconfigure(6, weight=1)
-    
-        self.sidebar_top_label = ctk.CTkLabel(self.sidebar_user_frame, text="WELCOME", font = ctk.CTkFont(size = 20, weight="bold"))
-        self.sidebar_top_label.grid(row = 0, column = 0, padx = 50, pady = (50, 20))
-
-        self.sidebar_submit_btn = ctk.CTkButton(self.sidebar_user_frame, width = 75, text="Sign out")
-        self.sidebar_submit_btn.grid(row = 3, column = 0, padx = 15, pady = (10,0))
-        self.sidebar_submit_btn.bind("<ButtonRelease-1>", sign_out)
-
         self.sidebar_user_frame.grid_remove()
+        #Title label
+        self.sidebar_top_label = ctk.CTkLabel(self.sidebar_user_frame, text="WELCOME".center(10), font = ctk.CTkFont(size = 20, weight="bold"))
+        self.sidebar_top_label.grid(row = 0, column = 0, padx = 30, pady = (50, 20))
+        #Sign out button
+        self.sidebar_submit_btn = ctk.CTkButton(self.sidebar_user_frame, width = 75, text="Sign out")
+        self.sidebar_submit_btn.grid(row = 4, column = 0, padx = 15, pady = (10,0))
+        self.sidebar_submit_btn.bind("<ButtonRelease-1>", sign_out)
+        #Sakrivanje framea u početku programa
+        self.sidebar_user_frame.grid_remove()
+    #####END SIDEBAR
+
+
+    #####CENTER START
+        #Center title
+        self.center_title_text = ctk.StringVar()
+        self.center_title_text.set("PLACEHOLDER")
+        self.center_title = ctk.CTkLabel(self, textvariable = self.center_title_text, font=("", 28) ,width=600, height=75, corner_radius=10, fg_color=("gray86", "gray17"))
+        self.center_title.grid(row = 0, column = 1, columnspan = 2, padx = 20, sticky = "n")
+        #Center frame   
+        self.center_frame = ctk.CTkFrame(self, width=600, corner_radius=5, fg_color="transparent")
+        self.center_frame.grid(row = 1, column = 1, rowspan = 4, columnspan = 2, padx = 20, pady = 15, sticky = "ns")
 
 
 
