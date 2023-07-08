@@ -22,8 +22,7 @@ def sign_in(event):
     if logged_in:
         app.sidebar_login_frame.grid_remove()
         app.sidebar_user_frame.grid()
-    else:
-        pass
+    
 
     print()
 
@@ -37,8 +36,7 @@ def sign_out(event):
         logged_in = False
         app.sidebar_user_frame.grid_remove()
         app.sidebar_login_frame.grid()
-    else:
-        pass
+    
     
 
 def test(event):
