@@ -1,6 +1,6 @@
 from typing import Optional, Tuple, Union
 import database.user_db as db
-import customtkinter as ctk
+import customtkinter as ctk  ########### pip install customtkinter ##########
 import os
 os.chdir("modul 3/Zadace/zadaca11/")
 
