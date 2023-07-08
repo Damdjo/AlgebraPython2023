@@ -1,6 +1,10 @@
 from typing import Optional, Tuple, Union
 import database.user_db as db
 import customtkinter as ctk  ########### pip install customtkinter ##########
+
+#DOKUMENTACIJA: https://customtkinter.tomschimansky.com/documentation
+#GITHUB:        https://github.com/TomSchimansky/CustomTkinter/tree/master
+
 import os
 os.chdir("modul 3/Zadace/zadaca11/")
 
@@ -12,21 +16,24 @@ ctk.set_default_color_theme("green")
 db_path = "database/user_accounts.db"
 logged_in = False
 #funkcije
+
+#Ulogiranje u program
 def sign_in(event):
     global logged_in
     uname = app.sidebar_uname_input.get()
     pword = app.sidebar_pword_input.get()
     message, logged_in = db.check_login(uname,pword,db_path)
     app.event_log_text.set(message)
-    
+    # ovo zamijeni sidebar sa drugim ako je login uspješan
     if logged_in:
         app.sidebar_login_frame.grid_remove()
         app.sidebar_user_frame.grid()
     
 
     print()
-
+#Odlogiranje iz programa
 def sign_out(event):
+    #nakon što se pritisne sign out gumb, polja sa unosom se vraćaju na placeholder vrijednosti
     global logged_in
     app.sidebar_uname_input.delete(0,ctk.END)
     app.sidebar_pword_input.delete(0,ctk.END)
@@ -43,14 +50,15 @@ def test(event):
     ctk.set_appearance_mode("light")
     
 
-columns = db.columns_tuple
-def db_action(event):    
-    #db.create_table(db_path)
-    #admin_hardcode = ("admin","admin123","IT","5")
-    #test = db.make_insert_query(admin_hardcode)    
-    #db.db_execute(test, db_path)    
-    #message = db.ispis_racuna(1,db_path=db_path)
-    #app.event_log_text.set(message)
+
+def db_action(event):
+    #ovo sam bindao na login button i samo jednom pokrenuo da se kreira baza sa hardkodiranim admin userom
+    """ 
+    db.create_table(db_path)
+    admin_hardcode = ("admin","admin123","IT","5")
+    test = db.make_insert_query(admin_hardcode)    
+    db.db_execute(test, db_path)
+    """
     pass
 
 #klase
