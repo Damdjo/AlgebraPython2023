@@ -15,6 +15,7 @@ ctk.set_default_color_theme("green")
 #init varijable
 db_path = "database/user_accounts.db"
 logged_in = False
+admin_seg_btn_menu = ""
 #funkcije
 
 #Ulogiranje u program
@@ -28,27 +29,69 @@ def sign_in(event):
     if logged_in:
         app.sidebar_login_frame.grid_remove()
         app.sidebar_user_frame.grid()
+        app.center_frame.grid()
     
 
     print()
 #Odlogiranje iz programa
 def sign_out(event):
     #nakon što se pritisne sign out gumb, polja sa unosom se vraćaju na placeholder vrijednosti
-    global logged_in
+    global logged_in, admin_seg_btn_menu
     app.sidebar_uname_input.delete(0,ctk.END)
     app.sidebar_pword_input.delete(0,ctk.END)
     app.event_log_text.set("")
     
     if logged_in:
         logged_in = False
+        admin_seg_btn_menu = ""
         app.sidebar_user_frame.grid_remove()
+        app.center_frame.grid_remove()
         app.sidebar_login_frame.grid()
-    
+        #tab close
+        app.center_seg_button_text.set("")
+        app.center_admin_show_user.grid_remove()
+        app.center_admin_add_user.grid_remove()
+        app.center_admin_modify_user.grid_remove()
+        app.center_admin_delete_user.grid_remove()
+
     
 
 def test(event):
     ctk.set_appearance_mode("light")
     
+def test_seg(event):
+    text = app.center_seg_button_text.get()
+    print(text)
+
+def seg_button_change(value):
+    global admin_seg_btn_menu
+    print(admin_seg_btn_menu)
+    admin_seg_btn_menu = value
+
+    match admin_seg_btn_menu:
+        case "Show user list":
+            app.center_admin_show_user.grid() ####Stisnuti
+            app.center_admin_add_user.grid_remove()
+            app.center_admin_modify_user.grid_remove()
+            app.center_admin_delete_user.grid_remove()
+        case "Add user":
+            app.center_admin_show_user.grid_remove()
+            app.center_admin_add_user.grid() ####Stisnuti
+            app.center_admin_modify_user.grid_remove()
+            app.center_admin_delete_user.grid_remove()
+        case "Modify user":
+            app.center_admin_show_user.grid_remove()
+            app.center_admin_add_user.grid_remove()
+            app.center_admin_modify_user.grid() ####Stisnuti
+            app.center_admin_delete_user.grid_remove()
+        case "Delete user":
+            app.center_admin_show_user.grid_remove()
+            app.center_admin_add_user.grid_remove()
+            app.center_admin_modify_user.grid_remove()
+            app.center_admin_delete_user.grid() ####Stisnuti
+        case _:
+            pass
+
 
 
 def db_action(event):
@@ -114,29 +157,70 @@ class App(ctk.CTk):
         self.sidebar_submit_btn = ctk.CTkButton(self.sidebar_user_frame, width = 75, text="Sign out")
         self.sidebar_submit_btn.grid(row = 4, column = 0, padx = 15, pady = (10,0))
         self.sidebar_submit_btn.bind("<ButtonRelease-1>", sign_out)
-        #Sakrivanje framea u početku programa
+        #Sakrivanje framea u početku programa, dok se korisnik ne ulogira
         self.sidebar_user_frame.grid_remove()
     #####END SIDEBAR
 
 
     #####CENTER START
+        self.center_frame = ctk.CTkFrame(self, width=600, corner_radius=5, fg_color="transparent")
+        self.center_frame.grid(row = 0, column = 1, rowspan = 5, columnspan = 2, padx = 20, pady = 5, sticky = "ns")
+        self.center_frame.grid_rowconfigure(0, weight = 0)
+        self.center_frame.grid_rowconfigure((1,2,3,4), weight = 1)
         #Center title
         self.center_title_text = ctk.StringVar()
         self.center_title_text.set("PLACEHOLDER")
-        self.center_title = ctk.CTkLabel(self, textvariable = self.center_title_text, font=("", 28) ,width=600, height=75, corner_radius=10, fg_color=("gray86", "gray17"))
-        self.center_title.grid(row = 0, column = 1, columnspan = 2, padx = 20, sticky = "n")
-        #Center frame   
-        self.center_frame = ctk.CTkFrame(self, width=600, corner_radius=5, fg_color="transparent")
-        self.center_frame.grid(row = 1, column = 1, rowspan = 4, columnspan = 2, padx = 20, pady = 15, sticky = "ns")
+        self.center_title = ctk.CTkLabel(self.center_frame, textvariable = self.center_title_text, font=("", 28) ,width=600, height=75, corner_radius=10, fg_color=("gray86", "gray17"))
+        self.center_title.grid(row = 0, column = 1, columnspan = 2, padx = 20, pady = (5, 0), sticky = "n")
+      ###Center frame #POTENCIJALNO SAMO ZA ADMINA, NOVI ZA USERE  
+        self.center_switch_frame = ctk.CTkFrame(self.center_frame, width=600, corner_radius=5, fg_color="transparent")
+        self.center_switch_frame.grid(row = 1, column = 1, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "ns")
+        self.center_switch_frame.grid_rowconfigure(1, weight=1)
+        ##################
+        #Center tab button
+        ##################
+        self.center_seg_button_text = ctk.StringVar(value = "")
+        self.center_seg_button = ctk.CTkSegmentedButton(self.center_switch_frame, command=seg_button_change, variable=self.center_seg_button_text)
+        self.center_seg_button.grid(row = 0, column = 1, padx = 5, pady = (0, 5), columnspan = 2, sticky = "nsew")
+        self.center_seg_button.configure(values = ["Show user list","Add user","Modify user","Delete user"])
+        #Center tab
+        ###Show user tab 
+        self.center_admin_show_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
+        self.center_admin_show_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        self.admin_show_user = ctk.CTkLabel(self.center_admin_show_user, text= "Show user list")
+        self.admin_show_user.pack()
+        self.center_admin_show_user.grid_remove()
+        ###Add tab  
+        self.center_admin_add_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
+        self.center_admin_add_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        self.admin_add_user = ctk.CTkLabel(self.center_admin_add_user, text= "Add user")
+        self.admin_add_user.pack()
+        self.center_admin_add_user.grid_remove()
+        ###Modify user tab  
+        self.center_admin_modify_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
+        self.center_admin_modify_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        self.admin_modify_user = ctk.CTkLabel(self.center_admin_modify_user, text= "Modify user")
+        self.admin_modify_user.pack()
+        self.center_admin_modify_user.grid_remove()
+        ###Delete user tab  
+        self.center_admin_delete_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
+        self.center_admin_delete_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        self.admin_delete_user = ctk.CTkLabel(self.center_admin_delete_user, text= "Delete user")
+        self.admin_delete_user.pack()
+        self.center_admin_delete_user.grid_remove()
 
+
+        #Sakrivanje menija dok se korisnik ne ulogira
+        self.center_frame.grid_remove()
+        
+        
 
 
             
 
         
         
-        
-        
+         
         
         
         
@@ -144,7 +228,19 @@ class App(ctk.CTk):
 
 
 
-
+"""
+self.center_tabview = ctk.CTkTabview(self.center_frame, width=800)
+        self.center_tabview.grid(row = 1, column = 1, padx = 5, pady = (0, 5), sticky = "nsew")
+        #tabs
+        self.center_tabview.add("Show user list")
+        self.center_tabview.tab("Show user list").grid_columnconfigure(0, weight=1)
+        self.center_tabview.add("Add user")
+        self.center_tabview.tab("Add user").grid_columnconfigure(1, weight=1)
+        self.center_tabview.add("Modify user")
+        self.center_tabview.tab("Modify user").grid_columnconfigure(2, weight=1)
+        self.center_tabview.add("Delete user")
+        self.center_tabview.tab("Delete user").grid_columnconfigure(3, weight=1)
+"""
 
 
 
