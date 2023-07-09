@@ -63,15 +63,18 @@ def sign_out(event):
 
 def test(event):
     ctk.set_appearance_mode("light")
-    
+
+
 
 def show_all_users():
-    #data = db.ispis_racuna(1,db_path=db_path)
     data = db.ispis_racuna(1,db_path=db_path)
     print(data)
-    #print(data)
 ###funkcije za admin segmentirani meni
-
+#funkcija koja se izvrši kada se klikne jedan od gumbiju
+def seg_button_change(value):
+    global admin_seg_btn_menu
+    admin_seg_btn_menu = value
+    change_seg_menu(admin_seg_btn_menu)
 #mijenja između menija tako da ostale gasi
 def change_seg_menu(selected_option):    
     app.focus() 
@@ -81,7 +84,7 @@ def change_seg_menu(selected_option):
             app.center_admin_add_user.grid_remove()
             app.center_admin_modify_user.grid_remove()
             app.center_admin_delete_user.grid_remove()
-            show_all_users()
+            show_all_table(app.show_user_table_frame)
         case "Add user":
             clear_add_user()
             app.center_admin_show_user.grid_remove()
@@ -136,7 +139,6 @@ def add_user_submit():
             case "User does not exist":
                 data_tuple = (uname, pword, dept, level)
                 ins_query = db.make_insert_query(data_tuple)
-                print(ins_query)
                 db.db_execute(ins_query, db_path)                
                 
             case _:
@@ -164,28 +166,59 @@ def clear_add_user():
     app.add_pword.configure(placeholder_text = "Password:")
     app.add_dept.set("Department")
     app.add_level.set("Level")
-#funkcija koja se izvrši kada se klikne jedan od gumbiju
-def seg_button_change(value):
-    global admin_seg_btn_menu
-    admin_seg_btn_menu = value
-    print(admin_seg_btn_menu)
-    change_seg_menu(admin_seg_btn_menu)
-
-    
 
 
-
-def db_action(event):
-    #ovo sam bindao na login button i samo jednom pokrenuo da se kreira baza sa hardkodiranim admin userom
-    """ 
-    db.create_table(db_path)
-    admin_hardcode = ("admin","admin123","IT","5")
-    test = db.make_insert_query(admin_hardcode)    
-    db.db_execute(test, db_path)
-    """
-    pass
 
 #klase
+
+class show_all_table:        
+    def __init__(self, app):
+        data = db.ispis_racuna(1,db_path=db_path)
+        total_rows = len(data)
+        total_columns = len(data[0])
+        titles = False
+        for column in range(total_columns):
+            match column:
+                case 0:
+                    self.entry = ctk.CTkLabel(app, text = "UserID",width=60)
+                    self.entry.grid(row = 0, column = column, padx = 2)
+                case 1:
+                    self.entry = ctk.CTkLabel(app, text = "Username", width=160)
+                    self.entry.grid(row = 0, column = column, padx = 2)
+                case 2:
+                    self.entry = ctk.CTkLabel(app, text = "Password", width=160,)
+                    self.entry.grid(row = 0, column = column, padx = 2)
+                case 3:
+                    self.entry = ctk.CTkLabel(app, text = "Department", width=120)
+                    self.entry.grid(row = 0, column = column, padx = 2)
+                case 4:
+                    self.entry = ctk.CTkLabel(app, text = "Level", width=60)
+                    self.entry.grid(row = 0, column = column, padx = 2)
+
+        for row in range(total_rows):
+            for column in range(total_columns):
+                match column:
+                    case 0:
+                        self.entry = ctk.CTkEntry(app, width=60)
+                        self.entry.grid(row = row+1, column = column, padx = 2)
+                        self.entry.insert(ctk.END, data[row][column])
+                    case 1:
+                        self.entry = ctk.CTkEntry(app, width=160)
+                        self.entry.grid(row = row+1, column = column, padx = 2)
+                        self.entry.insert(ctk.END, data[row][column])
+                    case 2:
+                        self.entry = ctk.CTkEntry(app, width=160,)
+                        self.entry.grid(row = row+1, column = column, padx = 2)
+                        self.entry.insert(ctk.END, data[row][column])
+                    case 3:
+                        self.entry = ctk.CTkEntry(app, width=120)
+                        self.entry.grid(row = row+1, column = column, padx = 2)
+                        self.entry.insert(ctk.END, data[row][column])
+                    case 4:
+                        self.entry = ctk.CTkEntry(app, width=60)
+                        self.entry.grid(row = row+1, column = column, padx = 2)
+                        self.entry.insert(ctk.END, data[row][column])
+
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()       
@@ -242,8 +275,10 @@ class App(ctk.CTk):
         self.sidebar_user_frame.grid_remove()
     #####END SIDEBAR
 
-
+    #################
     #####CENTER START
+    #################
+    
         self.center_frame = ctk.CTkFrame(self, width=600, corner_radius=5, fg_color="transparent")
         self.center_frame.grid(row = 0, column = 1, rowspan = 5, columnspan = 2, padx = 20, pady = 5, sticky = "ns")
         self.center_frame.grid_rowconfigure(0, weight = 0)
@@ -258,24 +293,35 @@ class App(ctk.CTk):
         self.center_switch_frame.grid(row = 1, column = 1, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "ns")
         self.center_switch_frame.grid_rowconfigure(0, weight=0)
         self.center_switch_frame.grid_rowconfigure((1,2,3,4), weight=1) # type: ignore
+
         ##################
         #Center tab button
         ##################
-        self.center_seg_button_text = ctk.StringVar(value = "")
-        self.center_seg_button = ctk.CTkSegmentedButton(self.center_switch_frame,width=600, command=seg_button_change, variable=self.center_seg_button_text)
-        self.center_seg_button.grid(row = 0, column = 0, columnspan = 2, padx = 5, pady = (0, 5), sticky = "nsew")
+
+        self.center_seg_button_text = ctk.StringVar(value = "".center(20))
+        self.center_seg_button = ctk.CTkSegmentedButton(self.center_switch_frame,width=600,command=seg_button_change,  variable=self.center_seg_button_text) #
         self.center_seg_button.configure(values = ["Show user list","Add user","Modify user","Delete user"])
+        self.center_seg_button.grid(row = 0, column = 0, columnspan = 2, padx = 5, pady = (0, 5), sticky = "nsew")
         #Center tab
-        ###Show user tab 
+        ###Empty frame
+        self.center_admin_empty = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5, fg_color="transparent")
+        self.center_admin_empty.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        ################
+        ###Show user tab
+        ################ 
         self.center_admin_show_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
-        self.center_admin_show_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
-        self.admin_show_user = ctk.CTkLabel(self.center_admin_show_user, text= "Show user list".center(20), width=560)
-        self.admin_show_user.grid(row = 1, column = 0, padx = 20, pady = 5)
+        self.center_admin_show_user.grid(row = 1, column = 0, rowspan = 6, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        self.center_admin_show_user.grid_rowconfigure(1, weight=1)
+        self.admin_show_user = ctk.CTkLabel(self.center_admin_show_user, text= "Show user".center(20), width=560)
+        self.admin_show_user.grid(row = 0, column = 0, padx = 20, pady = 5)
+        self.show_user_table_frame = ctk.CTkScrollableFrame(self.center_admin_show_user, width=560, corner_radius=5)
+        self.show_user_table_frame.grid(row = 1, column = 0, rowspan = 5, columnspan = 2, pady = 5, sticky = "nsew")
+
+        self.center_admin_show_user.grid_remove() 
         
-
-        #self.center_admin_show_user.grid_remove()
-
+        ##########
         ###Add tab  
+        ##########
         self.center_admin_add_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
         self.center_admin_add_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
         self.center_admin_add_user.grid_columnconfigure((0,1,2,3,4), weight=0) # type: ignore
@@ -304,7 +350,7 @@ class App(ctk.CTk):
         self.add_error_log = ctk.CTkLabel(self.center_admin_add_user, width = 480, text = "")
         self.add_error_log.grid(row = 3, column = 0, columnspan = 5, padx = 5, pady = 5)
 
-        #remove menu grid
+        #remove add user menu grid
         self.center_admin_add_user.grid_remove()
 
         ###Modify user tab  
@@ -327,7 +373,7 @@ class App(ctk.CTk):
 
 
         #Sakrivanje menija dok se korisnik ne ulogira
-        #self.center_frame.grid_remove()
+        self.center_frame.grid_remove()
         
         
 
