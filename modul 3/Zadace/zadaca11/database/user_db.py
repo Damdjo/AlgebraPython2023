@@ -12,6 +12,24 @@ def make_insert_query(values_tuple:tuple) -> str:
         """ 
     return insert_query
 
+def make_update_query(old_values_tuple:tuple, new_values_tuple:tuple) -> str:
+    id = old_values_tuple[0]
+    uname, pword, dept, level = old_values_tuple[1], old_values_tuple[2], old_values_tuple[3], old_values_tuple[4]
+    if new_values_tuple[1] != "":
+        uname = new_values_tuple[1]
+    if new_values_tuple[2] != "":
+        pword = new_values_tuple[2]
+    if new_values_tuple[3] != "":
+        dept = new_values_tuple[3]
+    if new_values_tuple[4] != "":
+        level = new_values_tuple[4]
+    update_query = f"""
+    UPDATE users 
+    SET username = '{uname}', password = '{pword}', department = '{dept}', level = {level}
+    WHERE userID = {id}
+    """ 
+    return update_query
+
 
 #Funkcija koja će izvršiti query iz argumenta
 def db_execute (query_to_execute:str, db_path):
