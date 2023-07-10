@@ -180,11 +180,11 @@ def main():
 #Hardcodiranje admin usera na prvom pokretanju
 
     os.chdir("modul 3/Zadace/zadaca11/database")
-    """db_path = "user_accounts.db"
+    db_path = "user_accounts.db"
     create_table(db_path)
     admin_hardcode = ("admin","admin123","IT","5")
     test = make_insert_query(admin_hardcode)    
-    db_execute(test, db_path) """
+    db_execute(test, db_path)
 
     
     data = ispis_racuna(1)

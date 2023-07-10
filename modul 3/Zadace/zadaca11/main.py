@@ -84,7 +84,8 @@ def change_seg_menu(selected_option):
             app.center_admin_add_user.grid_remove()
             app.center_admin_modify_user.grid_remove()
             app.center_admin_delete_user.grid_remove()
-            user_table(app.show_user_table_frame, data_type=1)
+            tablica_all = user_table(app.show_user_table_frame, data_type=1, fetch=True)
+            
         case "Add user":
             clear_add_user()
             app.center_admin_show_user.grid_remove()
@@ -96,8 +97,7 @@ def change_seg_menu(selected_option):
             app.center_admin_show_user.grid_remove()
             app.center_admin_add_user.grid_remove()
             app.center_admin_modify_user.grid() ####Stisnuti gumb
-            app.center_admin_delete_user.grid_remove()            
-            #user_table(app.modify_user_table_frame, data_type=2, stupac="username", vrijednost="damjan")
+            app.center_admin_delete_user.grid_remove()
         case "Delete user":
             app.center_admin_show_user.grid_remove()
             app.center_admin_add_user.grid_remove()
@@ -226,7 +226,32 @@ def modify_user_submit():
 ####################
 ### DELETE USER PART
 ####################
-
+#fetch button, dobavlja usera čiji je id unesen
+def fetch_selected_user():
+    app.delete_error_log.configure(text = "")
+    userid = app.delete_userid.get()
+    data = db.ispis_racuna(2,"userID", userid, db_path=db_path)
+    if data != "User does not exist":
+        user_table(app.delete_user_info_frame, data_type=2, stupac="userID",vrijednost=data[0])
+        print(app.delete_user_info_frame.winfo_height())
+    else:
+        app.delete_user_info_frame.grid_remove()
+        app.delete_error_log.configure(text = "User does not exist")
+#clear button
+def clear_delete_user():
+    app.focus()
+    app.delete_userid.delete(0,ctk.END)
+    app.delete_error_log.configure(text="")
+    app.delete_userid_title.grid()
+    app.delete_userid.grid()
+#delete button
+def delete_user():
+    userid = app.delete_userid.get()
+    if userid == "1":
+        app.delete_error_log.configure(text="Cannot delete admin user!")
+    else:
+        delete_query = f"DELETE FROM users WHERE userID = '{userid}'"
+        db.db_execute(delete_query,db_path=db_path)
 
 def get_table_data(type:int, stupac:str="", vrijednost:str="") -> list:
     match type:
@@ -245,9 +270,13 @@ def get_table_data(type:int, stupac:str="", vrijednost:str="") -> list:
 #klase
 
 class user_table:        
-    def __init__(self, app, data_type, stupac = "", vrijednost = ""):
+    def __init__(self, app, data_type, stupac = "", vrijednost = "", fetch = False):
         self.data_type = data_type
         data = get_table_data(self.data_type)
+        if fetch:
+            data = get_table_data(self.data_type)
+            print("fetched")
+        
         total_rows, total_columns = 1,1
                
         match self.data_type:
@@ -264,8 +293,7 @@ class user_table:
         for column in range(total_columns):
             match column:
                 case 0:
-                    self.entry = ctk.CTkLabel(app, text = "UserID",width=60)
-                    self.entry.grid(row = 0, column = column, padx = 2, pady = 1)
+                    pass
                 case 1:
                     self.entry = ctk.CTkLabel(app, text = "Username", width=160)
                     self.entry.grid(row = 0, column = column, padx = 2, pady = 1)
@@ -283,9 +311,13 @@ class user_table:
             for column in range(total_columns):
                 match column:
                     case 0:
-                        self.entry = ctk.CTkEntry(app, width=60)
-                        self.entry.grid(row = row+1, column = column, padx = 2, pady = 1)
-                        self.entry.insert(ctk.END, data[row][column])
+                        match self.data_type:
+                            case 1:
+                                self.entry = ctk.CTkEntry(app, width=60)
+                                self.entry.grid(row = row+1, column = column, padx = 2, pady = 1)
+                                self.entry.insert(ctk.END, data[row][column])
+                            case 2:
+                                pass
                     case 1:
                         self.entry = ctk.CTkEntry(app, width=160)
                         self.entry.grid(row = row+1, column = column, padx = 2, pady = 1)
@@ -485,9 +517,39 @@ class App(ctk.CTk):
         ###Delete user tab
         ##################  
         self.center_admin_delete_user = ctk.CTkFrame(self.center_switch_frame, width=600, corner_radius=5)
-        self.center_admin_delete_user.grid(row = 1, column = 0, rowspan = 4, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
+        self.center_admin_delete_user.grid(row = 1, column = 0, rowspan = 5, columnspan = 2, padx = 20, pady = 5, sticky = "nsew")
         self.admin_delete_user = ctk.CTkLabel(self.center_admin_delete_user, text= "Delete user".center(20), width=560)
-        self.admin_delete_user.grid(row = 1, column = 0, padx = 20, pady = 5)
+        self.admin_delete_user.grid(row = 1, column = 0, columnspan = 5, padx = 20, pady = 5)
+        ###Input part    
+        
+        
+        
+        #info frame 
+        self.delete_user_info_frame = ctk.CTkFrame(self.center_admin_delete_user, width=600, corner_radius=5, fg_color="transparent", height=60)
+        self.delete_user_info_frame.grid(row = 1, rowspan = 1, column = 0, columnspan = 5, padx = 0, pady = 5, sticky = "nsew") 
+        self.delete_user_info_frame.grid_rowconfigure((0,1), weight=0) # type: ignore      
+        self.delete_userid_title = ctk.CTkLabel(self.delete_user_info_frame, text = "UserID",width=60)
+        self.delete_userid_title.grid(row = 0, column = 0, padx = 2, pady = 1)
+        self.delete_userid = ctk.CTkEntry(self.delete_user_info_frame, placeholder_text = "UserID",width=60)
+        self.delete_userid.grid(row = 1, column = 0, padx = (10,2), pady = 10, sticky = "w")
+
+        #button frame
+        self.delete_buttons_frame = ctk.CTkFrame(self.center_admin_delete_user, width=600, corner_radius=5, fg_color="transparent")
+        self.delete_buttons_frame.grid(row = 2, column = 0, columnspan = 5, padx = 0, pady = 5, sticky = "new")
+        self.delete_buttons_frame.grid_columnconfigure(4, weight=1)
+        #fetch button
+        self.delete_fetch_button = ctk.CTkButton(self.delete_buttons_frame, width = 60, text = "Fetch", command=fetch_selected_user)
+        self.delete_fetch_button.grid(row = 0, column = 0, padx = 10, pady = 25, sticky = "w")
+        #delete button
+        self.delete_confirm_button = ctk.CTkButton(self.delete_buttons_frame, width = 75, text = "Delete", command=delete_user)
+        self.delete_confirm_button.grid(row = 0, column = 4, padx = (0, 100), pady = 25, sticky = "e")
+        #clear button
+        self.delete_clear_button = ctk.CTkButton(self.delete_buttons_frame, width = 75, text = "Clear input",
+                                          command=clear_delete_user, fg_color= ("gray15", "gray34"), hover_color= ("gray17","gray24"))
+        self.delete_clear_button.grid(row = 0, column = 4, padx = (2,10), pady = 25, sticky = "e")
+        #error log
+        self.delete_error_log = ctk.CTkLabel(self.center_admin_delete_user, width = 580, text = "")
+        self.delete_error_log.grid(row = 3,  column = 0, padx = 10, pady = 5, sticky = "s")
 
         #remove/hide delete user menu grid
         #self.center_admin_delete_user.grid_remove()
