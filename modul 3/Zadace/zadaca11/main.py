@@ -552,11 +552,11 @@ class App(ctk.CTk):
         self.delete_error_log.grid(row = 3,  column = 0, padx = 10, pady = 5, sticky = "s")
 
         #remove/hide delete user menu grid
-        #self.center_admin_delete_user.grid_remove()
+        self.center_admin_delete_user.grid_remove()
 
 
         #Sakrivanje menija dok se korisnik ne ulogira
-        #self.center_switch_frame.grid_remove()
+        self.center_frame.grid_remove()
         
         
 
