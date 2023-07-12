@@ -310,14 +310,6 @@ class user_table:
         for row in range(total_rows):
             for column in range(total_columns):
                 match column:
-                    case 0:
-                        match self.data_type:
-                            case 1:
-                                self.entry = ctk.CTkEntry(app, width=60)
-                                self.entry.grid(row = row+1, column = column, padx = 2, pady = 1)
-                                self.entry.insert(ctk.END, data[row][column])
-                            case 2:
-                                pass
                     case 1:
                         self.entry = ctk.CTkEntry(app, width=160)
                         self.entry.grid(row = row+1, column = column, padx = 2, pady = 1)
