@@ -38,21 +38,22 @@ def make_update_query(old_values_tuple:tuple, new_values_tuple:tuple) -> str:
 
 
 #Funkcija koja će izvršiti query iz argumenta
-def db_execute (query_to_execute:str, db_path):
+def db_execute (query_to_execute:str, db_path) -> None | str:
     connection = None
     try:
         connection = sqlite3.connect(db_path)
+        cursor = connection.cursor()
+        cursor.execute(query_to_execute)
     
     except sqlite3.IntegrityError as IntErr:
-        print(f"Database error: {IntErr}")
-        return None
+        return str(IntErr)
     
     except sqlite3.Error as e:
         print(f"Database error: {e}")
+    
         
     else:
-        cursor = connection.cursor()
-        cursor.execute(query_to_execute)  
+          
         print("Success")  
         
     finally:
@@ -153,8 +154,8 @@ def create_table(db_path:str="user_accounts.db"):
         CREATE TABLE users (
         userID INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL UNIQUE,
-        surname TEXT NOT NULL UNIQUE,
-        PIN INTEGER NOT NULL,
+        surname TEXT NOT NULL,
+        PIN INTEGER NOT NULL UNIQUE,
         is_admin INTEGER NOT NULL,
         active INTEGER NOT NULL,
         has_rfid INTEGER NOT NULL
@@ -187,15 +188,32 @@ def main():
     
 #Hardcodiranje admin usera na prvom pokretanju
 
-    os.chdir("modul 3/smartkey_damjan_jaksic_V1")
-    """ db_path = "database/user_accounts.db"
-    create_table(db_path)
+    os.chdir("modul 3/smartkey_damjan_jaksic_V2")
+    db_path = "database/user_accounts.db"
+
+    
+    """ create_table(db_path)
     admin_hardcode = ("admin","adminovic",123456,1,1,1)
     test = make_insert_query(admin_hardcode)
     print(test)
     db_execute(test,db_path=db_path)
     sel_all = "SELECT * FROM users"    
     db_execute(sel_all, db_path) """
+
+   
+    
+    
+    """ #QUERY ZA TEST USERE
+    test1 = ("test1","testic1",123458,1,1,1)
+    test2 = ("test2","testic2",234567,0,1,1)
+    test3 = ("test3","testic3",345678,1,0,1)
+    test4 = ("test4","testic4",456789,0,0,1)
+    test5 = ("test5","testic5",567890,1,1,0)
+    test_list = (test1,test2,test3,test4,test5)
+    for test in test_list:
+        query = make_insert_query(test)
+        db_execute(query,db_path=db_path) """
+
 
     
     data = ispis_racuna(1, db_path=db_path)
