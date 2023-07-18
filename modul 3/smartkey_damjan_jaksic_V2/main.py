@@ -1,7 +1,8 @@
 from typing import Optional, Tuple, Union
 import database.user_db as db
 import customtkinter as ctk  ########### pip install customtkinter ##########
-import time, threading
+import time, threading, winsound #wait and sound function for doorbell
+
 
 #DOKUMENTACIJA: https://customtkinter.tomschimansky.com/documentation
 #GITHUB:        https://github.com/TomSchimansky/CustomTkinter/tree/master
@@ -9,6 +10,8 @@ import time, threading
 
 import os
 os.chdir("modul 3/smartkey_damjan_jaksic_V2")
+sound = "door_bell.wav"
+
 
 
 #pocetne varijable
@@ -26,6 +29,7 @@ admin_menu = False
 ####funkcije
 #pozvoni
 def pozvoni():
+    winsound.PlaySound(sound,winsound.SND_ASYNC)
     app.status_text.configure(fg_color = "forestgreen")            
     app.status_text.delete("0.0","end")            
     app.status_text.insert("1.0","Bell rung\n")           
