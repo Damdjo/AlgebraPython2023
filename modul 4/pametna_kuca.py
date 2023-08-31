@@ -24,3 +24,14 @@ ANTE LINKOVI
 #mjerenje vlažnosti tla u vazama od biljaka te slanje poruke kada treba zaliti
 
 
+###SA PREDAVANJA 31.08
+#Koje funkcionalnosti za smart kuću možemo ponuditi
+
+"""
+-Kontrola temperature i vlažnosti tako da se ukombiniraju senzori topline i vlage sa klima uređajem
+-Upravljanje roletama za prozore putem aplikacije/sučelja
+-Kontrola rasvjete detekcijom pokreta, glasovnih naredbi ili aplikacijom/sučeljem
+-Otključavanje / zaključavanje vrata
+-Pametne utičnice koje mjere potrošnju te daju izvještaje
+
+"""
