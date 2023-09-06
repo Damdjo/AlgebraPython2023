@@ -1,4 +1,4 @@
-from sense_emu import SenseHat
+from sense_emu import SenseHat  #type:ignore
 import time
 #import json
 import sqlite3
@@ -42,7 +42,7 @@ try:
 except sqlite3.Error as err:
     print('Greska')
 finally:
-    if sc:
+    if sc: #type:ignore
         sc.close()
  
 sense = SenseHat()
@@ -88,25 +88,25 @@ while True:
                     if col==-1:
                         col=0
                     else:
-                        uz_current.append((col,row))
+                        uz_current.append((col,row)) #type:ignore
                 elif event.direction=='right':
                     col+=1
                     if col==8:
                         col=7
                     else:
-                        uz_current.append((col,row))
+                        uz_current.append((col,row)) #type:ignore
                 elif event.direction=='up':
                     row-=1
                     if row==-1:
                         row=0
                     else:
-                        uz_current.append((col,row))
+                        uz_current.append((col,row)) #type:ignore
                 elif event.direction=='down':
                     row+=1
                     if row==8:
                         row=7
                     else:
-                        uz_current.append((col,row))
+                        uz_current.append((col,row)) #type:ignore
                 elif event.direction=='middle':
                     if save_mode:
                         conv_pattern=convert_to_num(uz_current)
@@ -126,7 +126,7 @@ while True:
                             else:
                                 print('Greska')
                         finally:
-                            if sc:
+                            if sc: #type:ignore
                                 sc.close()
                         user+=1
                         save_mode=False
@@ -139,13 +139,13 @@ while True:
                             try:
                                 sc=sqlite3.connect(database)
                                 cursor=sc.cursor()
-                                cursor.execute(delete_pattern, (conv_pattern,))
+                                cursor.execute(delete_pattern, (conv_pattern,)) #type:ignore
                                 sc.commit()
                                 cursor.close()
                             except sqlite3.Error as err:
                                 print('Greska')
                             finally:
-                                if sc:
+                                if sc: #type:ignore
                                     sc.close()
                             
                             edit_mode = False
@@ -162,19 +162,19 @@ while True:
                         
                     elif modify_mode:
                         
-                        print(conv_pattern)
+                        print(conv_pattern) #type:ignore
                         print(uz_current)
                         new_pattern = convert_to_num(uz_current)
                         try:
                             sc=sqlite3.connect(database)
                             cursor=sc.cursor()
-                            cursor.execute(update_pattern, (new_pattern,conv_pattern,))
+                            cursor.execute(update_pattern, (new_pattern,conv_pattern,)) #type:ignore
                             sc.commit()
                             cursor.close()
                         except sqlite3.Error as err:
                             print('Greska')
                         finally:
-                            if sc:
+                            if sc: #type:ignore
                                 sc.close()
                         modify_mode = False
                         
@@ -195,11 +195,11 @@ while True:
                         except sqlite3.Error as err:
                             print('Greska')
                         finally:
-                            if sc:
+                            if sc: #type:ignore
                                 sc.close()
                         if postoji and not modify_mode:
                             print('Dopusten ulaz')
-                            print(records)
+                            print(records) #type:ignore
                             sense.clear(G)
                         else:
                             print('Ulaz zabranjen')
