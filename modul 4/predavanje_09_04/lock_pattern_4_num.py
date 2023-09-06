@@ -11,7 +11,6 @@ def convert_to_num(pattern_list:list):
         total += num
     return total
 
-#def 
 
 database='uzoraknum.db'
  
@@ -162,8 +161,7 @@ while True:
                         
                     elif modify_mode:
                         
-                        print(conv_pattern) #type:ignore
-                        print(uz_current)
+                        
                         new_pattern = convert_to_num(uz_current)
                         try:
                             sc=sqlite3.connect(database)

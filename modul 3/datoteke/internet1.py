@@ -3,7 +3,7 @@ import urllib.parse
 import json
 
 URL = "https://www.algebra.hr"
-URL2 = "https://api.tutiempo.net/json/?lan=en&apid=zwDX4azaz4X4Xqs&ll=45.49167,15.55"
+URL2 = "https://api.tutiempo.net/json/?lan=en&apid=zwDX4azaz4X4Xqs&ll=45.7,15.554916"
 connection = urllib.request.urlopen(URL2)
 
 stranica = connection.read().decode()
