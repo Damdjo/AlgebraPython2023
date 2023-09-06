@@ -1,6 +1,6 @@
 from sense_emu import SenseHat
 import time
-import json
+#import json
 import sqlite3
 
 def convert_to_num(pattern_list:list):
@@ -11,16 +11,27 @@ def convert_to_num(pattern_list:list):
         total += num
     return total
 
+#def 
+
 database='uzoraknum.db'
  
 create_table='''CREATE TABLE IF NOT EXISTS Uzorak (
 id INTEGER PRIMARY KEY,
 name TEXT NOT NULL,
-pattern TEXT NOT NULL);'''
+pattern TEXT NOT NULL UNIQUE);'''
  
 insert_into_table='''INSERT INTO Uzorak (name, pattern) VALUES (?, ?)'''
  
 select_pattern='''SELECT * FROM Uzorak WHERE pattern=?'''
+
+delete_pattern='''DELETE FROM Uzorak WHERE pattern=?'''
+
+update_pattern = """
+UPDATE Uzorak 
+SET pattern = ?
+WHERE pattern = ?
+"""
+
  
 try:
     sc=sqlite3.connect(database)
@@ -62,6 +73,8 @@ col=0
 row=0
 sense.set_pixel(0,0,G)
 save_mode=False
+edit_mode = False
+modify_mode=False
 user=0
  
 while True:
@@ -95,7 +108,6 @@ while True:
                     else:
                         uz_current.append((col,row))
                 elif event.direction=='middle':
- 
                     if save_mode:
                         conv_pattern=convert_to_num(uz_current)
                         username='user'+str(user)
@@ -106,14 +118,66 @@ while True:
                             sc.commit()
                             cursor.close()
                         except sqlite3.Error as err:
+                            error = str(err)
+                            if error == "UNIQUE constraint failed: Uzorak.pattern":
+                                save_mode=False
+                                edit_mode = True
+                                print("Pomaknite pokazivac lijevo za brisanje uzorka, ili lijevo za uredivanje!")
+                            else:
+                                print('Greska')
+                        finally:
+                            if sc:
+                                sc.close()
+                        user+=1
+                        save_mode=False
+                    elif edit_mode:
+                        print(edit_mode)
+                        print(uz_current)
+                        ###DELETE####
+                        if uz_current == [(3,3),(2,3)]:
+                            print("delete")
+                            try:
+                                sc=sqlite3.connect(database)
+                                cursor=sc.cursor()
+                                cursor.execute(delete_pattern, (conv_pattern,))
+                                sc.commit()
+                                cursor.close()
+                            except sqlite3.Error as err:
+                                print('Greska')
+                            finally:
+                                if sc:
+                                    sc.close()
+                            
+                            edit_mode = False
+                        ###MODIFY####
+                        elif uz_current == [(3,3),(4,3)]:
+                            print("edit")
+                            modify_mode=True
+                            
+                            edit_mode = False
+                        else:
+                            print("Edit error")
+                            edit_mode = False 
+                        
+                        
+                    elif modify_mode:
+                        
+                        print(conv_pattern)
+                        print(uz_current)
+                        new_pattern = convert_to_num(uz_current)
+                        try:
+                            sc=sqlite3.connect(database)
+                            cursor=sc.cursor()
+                            cursor.execute(update_pattern, (new_pattern,conv_pattern,))
+                            sc.commit()
+                            cursor.close()
+                        except sqlite3.Error as err:
                             print('Greska')
                         finally:
                             if sc:
                                 sc.close()
- 
-                        user+=1
-                        save_mode=False
- 
+                        modify_mode = False
+                        
                     else:
                         postoji=False
                         korisnik=None
@@ -133,13 +197,23 @@ while True:
                         finally:
                             if sc:
                                 sc.close()
-                        if postoji:
+                        if postoji and not modify_mode:
                             print('Dopusten ulaz')
+                            print(records)
                             sense.clear(G)
                         else:
                             print('Ulaz zabranjen')
                             sense.clear(R)
-                    if uz_new==uz_current:
+                    if edit_mode:
+                        
+                        print('Edit mod')
+                        sense.clear()
+                        col=3
+                        row=3
+                        uz_current.clear()
+                        uz_current=[(3,3)]
+                        
+                    elif uz_new==uz_current:
                         print('Save mod')
                         save_mode=True
                         sense.clear()
@@ -147,13 +221,25 @@ while True:
                         row=0
                         uz_current.clear()
                         uz_current=[(0,0)]
+                    elif modify_mode:
+                        print('Modify mod')
+                        sense.clear()
+                        col=0
+                        row=0
+                        uz_current.clear()
+                        uz_current=[(0,0)]
+                        
+                    else:
+                        col=0
+                        row=0
+                        #uz_current.clear()
+                        uz_current=[(0,0)]
+                        
                     time.sleep(1)
                     sense.clear()
-                    col=0
-                    row=0
-                    #uz_current.clear()
-                    uz_current=[(0,0)]
+                    
  
+          
                 sense.set_pixel(col,row,G)
  
  
