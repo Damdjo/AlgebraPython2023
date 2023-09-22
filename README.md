@@ -18,6 +18,8 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 
 [Github Miroslav]
 
+[Generiranje temperatura] #Generiranje temperatura od zadanog dana + 2 godine 
+
 [24 Sata - Scrapeanje]  #Scrapeanje članaka sa 24 Sata
 
 [Baze podataka M]
@@ -49,5 +51,6 @@ Repozitorij zadataka i zadaća sa predavanja "Python developer" u Algebri
 [Baze 2]: https://www.onlinegdb.com/xnQ2IAJH8l
 [Baze korisnicki racuni]: https://github.com/FraneCal/Python-Course/blob/main/SQLite/database_class_updated.py
 [Eurojackpot zadaca M]: https://github.com/Damdjo/AlgebraPython2023/blob/master/Miroslav/tkinter/zad1_loto_tkinter.py
+[Generiranje temperatura]: https://github.com/Damdjo/AlgebraPython2023/blob/0e3f588768ad24f475760a1c426edb953950115c/modul%205/JupyterNotebooks/miro_zadaca/generiranje_temp.py
       
   
