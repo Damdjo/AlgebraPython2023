@@ -60,7 +60,7 @@ while current_datetime < datetime.now():
     humidity = round(random.uniform(15, 95), 2)    # Vlažnost od 15% do 95%
     pressure = round(random.uniform(990, 1035), 2) # Tlak zraka od 990 hPa do 1035 hPa
     
-    data.setdefault(current_datetime.strftime('%d.%m.%Y'), []).append((current_datetime.strftime('%H:%M'), round(temperature, 2), humidity, pressure)) #type: ignore
+    data.setdefault(current_datetime.strftime('%d.%m.%Y'), []).append((current_datetime.strftime('%H:%M'), round(temperature, 2), humidity, pressure)) #type: ignore  .
     
     current_datetime += timedelta(minutes=15)
     current_temperature = temperature  # Postavite trenutnu temperaturu za sljedeći korak
